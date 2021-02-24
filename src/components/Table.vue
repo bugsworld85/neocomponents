@@ -247,8 +247,8 @@
                                 v-model="row[getKey(column)]"
                                 v-if="getType(column) === 'text'"
                                 readonly="readonly"
-                                @dblclick="handleInputDoubleClick"
-                                @blur="handleInputBlur"
+                                @dblclick="handleInputDoubleClick($event, column, row)"
+                                @blur="handleInputBlur($event, column, row)"
                                 @keyup="handleInputKeyup($event, column, row)"
                                 @keydown="
                                     handleInputKeydown($event, column, row)
@@ -262,8 +262,8 @@
                                 v-model="row[getKey(column)]"
                                 v-else-if="getType(column) === 'textarea'"
                                 readonly="readonly"
-                                @dblclick="handleInputDoubleClick"
-                                @blur="handleInputBlur"
+                                @dblclick="handleInputDoubleClick($event, column, row)"
+                                @blur="handleInputBlur($event, column, row)"
                                 @keyup="handleInputKeyup($event, column, row)"
                                 @keydown="handleInputKeydown($event, column, row)"
                                 @change="handleInputChange($event, column, row)"
@@ -275,8 +275,8 @@
                                 v-model.number="row[getKey(column)]"
                                 v-else-if="getType(column) === 'number'"
                                 readonly="readonly"
-                                @dblclick="handleInputDoubleClick"
-                                @blur="handleInputBlur"
+                                @dblclick="handleInputDoubleClick($event, column, row)"
+                                @blur="handleInputBlur($event, column, row)"
                                 @keyup="handleInputKeyup($event, column, row)"
                                 @keydown="
                                     handleInputKeydown($event, column, row)
@@ -540,6 +540,7 @@ import mixins from "../lib/mixins.js";
 import filters from "../lib/filters.js";
 import props from "../lib/props.js";
 // import "font-awesome/css/font-awesome.min.css";
+// import "../assets/scss/table.scss";
 
 export default {
     name: "neo-table",
@@ -793,16 +794,28 @@ export default {
                 await column.input(e, row, column);
             }
         }, 500),
-        handleInputBlur(e) {
+        async handleInputBlur(e, column, row) {
             e.target.readOnly = true;
 
-            this.$emit("onInputBlur", e);
+            if (
+                !this.isString(column) &&
+                {}.hasOwnProperty.call(column, "blur") &&
+                e.target.readOnly === false
+            ) {
+                await column.blur(e, row, column);
+            }
         },
-        handleInputDoubleClick(e) {
+        async handleInputDoubleClick(e, column, row) {
             this.oldInputValue = e.target.value;
             e.target.readOnly = false;
 
-            this.$emit("onInputDoubleClick", e);
+            if (
+                !this.isString(column) &&
+                {}.hasOwnProperty.call(column, "doubleClick") &&
+                e.target.readOnly === false
+            ) {
+                await column.doubleClick(e, row, column);
+            }
         },
         handleRowSelect(e) {
             if (!e.target.checked) {

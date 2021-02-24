@@ -11,12 +11,22 @@
             :enableSearch="false"
             sortedColumn="name"
         ></neo-table>
+        <neo-window
+            title="Edit Notes"
+            ref="neoWindow"
+            @onclose="handleWindowClose"
+            size="medium"
+            maxHeight="400px"
+        >
+            This is a test
+        </neo-window>
     </div>
 </template>
 
 <script>
 import TestData from "./tests/data.js";
-import { NeoTable } from "./components/Table";
+import NeoTable from "./components/Table.vue";
+import NeoWindow from "./components/Window.vue";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "font-awesome/css/font-awesome.min.css";
 
@@ -27,6 +37,7 @@ export default {
     },
     components: {
         NeoTable,
+        NeoWindow
     },
     data() {
         return {
@@ -105,14 +116,13 @@ export default {
             ],
         };
     },
-    mounted() {
-        console.log(this.products);
+    mounted () {
+        this.$refs.neoWindow.open();
     },
     methods: {
-        handlePaginationClick() {},
-        remapRow(row) {
-            console.log(row);
-        },
+        handleWindowClose() {
+            
+        }
     },
 };
 </script>

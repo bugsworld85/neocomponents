@@ -19,12 +19,11 @@
         "bootstrap": "^4.6.0",
         "font-awesome": "^4.7.0",
         "jquery": "^1.9.1",
-        "node-sass": "^5.0.0",
+        "node-sass": "^4.14.1",
         "popper.js": "^1.16.1",
-        "sass-loader": "^11.0.1",
+        "sass-loader": "^8.0.0",
         "vue": "^2.6.12",
-        "vue-template-compiler": "^2.6.12",
-        "webpack": "^5.23.0"
+        "vue-template-compiler": "^2.6.12"
     },
     "config": {
         "resolve": {

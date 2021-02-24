@@ -1,4 +1,4 @@
-.table-module {
+.neo-table {
     position: relative;
 }
 .table-container {
@@ -187,7 +187,10 @@ table {
                 text-align: left;
                 padding: 0.5em;
                 text-align: inherit;
+                color: inherit;
                 i {
+                    // float: right;
+                    // transform: translate(-10px, calc(50% - 3px));
                     color: #aaa;
                 }
                 &:hover {
@@ -200,6 +203,15 @@ table {
             span {
                 padding: 0.5em;
                 font-weight: normal;
+                display: block;
+                i {
+                    color: #aaa;
+                }
+            }
+            .btn {
+                i {
+                    color: inherit;
+                }
             }
         }
     }
