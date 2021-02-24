@@ -37,7 +37,7 @@ NeoComponents requires [Node.js](https://nodejs.org/) v12+ to run.
 Install the dependencies and devDependencies and start the server.
 
 ```sh
-$ npm install --save neocomponents
+$ npm install --save @bugsworld85/neocomponents
 ```
 Include into your component.
 ```javascript
