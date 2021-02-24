@@ -1,0 +1,57 @@
+{
+    "name": "neocomponents",
+    "version": "0.1.0",
+    "private": false,
+    "scripts": {
+        "serve": "vue-cli-service serve",
+        "build": "vue-cli-service build --target lib --name neo-components ./src/index.js",
+        "lint": "vue-cli-service lint",
+        "build-dist": "vue-cli-service build --target lib --name neo-components ./src/index.js"
+    },
+    "dependencies": {
+        "lodash": "^4.17.21",
+        "moment": "^2.29.1"
+    },
+    "devDependencies": {
+        "@vue/cli": "^4.5.11",
+        "@vue/cli-service": "^4.5.11",
+        "@vue/cli-service-global": "^4.5.11",
+        "bootstrap": "^4.6.0",
+        "font-awesome": "^4.7.0",
+        "jquery": "^1.9.1",
+        "node-sass": "^5.0.0",
+        "popper.js": "^1.16.1",
+        "sass-loader": "^11.0.1",
+        "vue": "^2.6.12",
+        "vue-template-compiler": "^2.6.12",
+        "webpack": "^5.23.0"
+    },
+    "config": {
+        "resolve": {
+            "alias": {
+                "vue$": "vue/dist/vue.esm.js"
+            }
+        }
+    },
+    "license": "MIT",
+    "main": "./dist/neo-components.common.js",
+    "files": [
+        "dist/*",
+        "src/index.js",
+        "src/components/*",
+        "src/lib/*"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/bugsworld85/neotable.git"
+    },
+    "keywords": [
+        "table",
+        "data-table"
+    ],
+    "description": "Feature pack dynamic table.",
+    "author": {
+        "name": "Jovanni G",
+        "email": "bugsworld85@gmail.com"
+    }
+}
