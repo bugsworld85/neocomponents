@@ -38,17 +38,24 @@
         "dist/*",
         "src/index.js",
         "src/components/*",
+        "src/assets/scss/*",
         "src/lib/*"
     ],
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/bugsworld85/neotable.git"
+        "url": "git+https://github.com/bugsworld85/neocomponents.git"
     },
     "keywords": [
         "table",
-        "data-table"
+        "data-table",
+        "window",
+        "bootstrap",
+        "vuejs",
+        "vue",
+        "pagination",
+        "paginator"
     ],
-    "description": "Feature pack dynamic table.",
+    "description": "Pre built VueJS components to make developer's life easier.",
     "author": {
         "name": "Jovanni G",
         "email": "bugsworld85@gmail.com"
