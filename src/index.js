@@ -2,6 +2,7 @@ import NeoTable from "./components/Table";
 import NeoPaginator from "./components/Paginator";
 import NeoWindow from "./components/Window";
 import NeoSwitch from "./components/Switch";
+import "./assets/scss/neocomponents.scss";
 
 const NAME = 'NeoComponents';
 
@@ -12,7 +13,11 @@ const NeoComponents = {
         Vue.component("neo-window", NeoWindow);
         Vue.component("neo-switch", NeoSwitch);
     },
-    NAME
+    NAME,
+    NeoTable,
+    NeoPaginator,
+    NeoWindow,
+    NeoSwitch
 }
 
 export {
