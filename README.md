@@ -127,21 +127,23 @@ Name | Type | Default | Description
 `multipleRows` |  `Boolean` | `true` | Enable multiple row selection.
 `page` |  `Integer` | `1` | Page to display if `showAll` is `false` and pagination is present.
 `placeholder` |  `String` | `"Search for..."` | Placeholder text on search input field.
-`realTime` |  `Boolean` | `true` | All component events are triggered only from given frontend `data`.
 `searchedKeyword` |  `String` | `null` | The search keyword string.
-`showAll` |  `Boolean` | `false` | Don't paginate data. Display whatever is inside `data` property.
+`enableDataFilter` |  `Boolean` | `true` | Enable or disable built-in data filtration. Useful if you are just passing data and does the filtration manually.
+`enableDataSorting` |  `Boolean` | `true` | Enable or disable built-in data table sorting. Useful if you are sorting data manually.
+`enableDataPagination` |  `Boolean` | `true` | Enable or disable built-in data pagination. Useful if you are paginating data manually.
 `sortedColumn` |  `String` | `null` | The column to be sorted accordingly.
 `totalTableRows` |  `Integer` | `0` | The length of data.
 
 #### Component Events
 Event | Accepts | Description
 ------- | ---------------- | ---------
-`@searchInput` |  `event, NeoTable` | Listen to search input typing.
+`@onSearchInput` |  `event, NeoTable` | Listen to search input typing.
 `@onClearSearch` |  | Triggered when you clear search.
-`@paginationClick` | `event, pageNumber, { keyword, sortedColumn, asc }, NeoTable` | Triggered when you click on pagination buttons.
-`@onRowSelect` | `isChecked, event` | Fired when you selected a row via checkbox. Only when `multipleRows` is `true`.
+`@paginationClick` | `event, pageNumber, { keyword, sortedColumn, asc }, NeoTable` | Triggered when you click on pagination buttons. Must return new page value.
+`@onRowSelect` | `isChecked, row, index, data, event` | Fired when you selected a row via checkbox. Only when `multipleRows` is `true`. `data` contains all checked items.
 `@onCheckAll` | `isChecked, data, event` | Fired when you check column header checkbox. Only when `multipleRows` is `true`.
-`@sortClick` | `key, isAsc` | Fired when you click on column header title.
+`@sortClick` | `sortColumnKey, isAsc` | Fired when you click on column header title.
+`@overrideSort` | `a, b, sortColumnKey` | Overrides how data is being sort. Must return `1`, `-1`, `0`;
 
 #### Column Properties
 Property | Type | Default | Required | Description
@@ -178,6 +180,8 @@ Type | Description
  - Write documentation on NeoPaginator
  - Create and write NeoSwitch component and documentation
  - Include `textarea` in column types.
+ - Add lazy loading capabilities.
+ - Add slots to NeoTable.
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.

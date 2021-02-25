@@ -221,7 +221,7 @@
                                     class="custom-control-input"
                                     :id="`row-${i}-col-select`"
                                     v-model="row.checked"
-                                    @change="handleRowSelect($event, i)"
+                                    @change="handleRowSelect($event, row, i)"
                                 />
                                 <label
                                     class="custom-control-label"
@@ -409,8 +409,8 @@
             </table>
         </div>
         <div class="table-footer">
-            <div class="row">
-                <div class="col-md-4">
+            <div class="row" v-if="enableDataPagination">
+                <div class="col-md-4 text-left">
                     <span
                         class="nowrap ml-2"
                         v-if="rows().length > 0 && !showAll"
@@ -712,21 +712,25 @@ export default {
             }
         },
         handlePaginationClick(e, page) {
-            var currentPage = this.$emit(
-                "paginationClick",
-                e,
-                page,
-                {
-                    keyword: this.isset(this.searchedKeyword)
-                        ? this.searchedKeyword
-                        : this.keyword,
-                    sortedColumn: this.isset(this.sortedColumn)
-                        ? this.sortedColumn
-                        : this.sortedColumn,
-                    asc: this.asc,
-                },
-                this
-            );
+            var currentPage = page;
+
+            if(this.isset(this.$listeners.paginationClick)){
+                currentPage = this.$emit(
+                    "paginationClick",
+                    e,
+                    page,
+                    {
+                        keyword: this.isset(this.searchedKeyword)
+                            ? this.searchedKeyword
+                            : this.keyword,
+                        sortedColumn: this.isset(this.sortedColumn)
+                            ? this.sortedColumn
+                            : this.sortedColumn,
+                        asc: this.asc,
+                    },
+                    this
+                );
+            }
 
             if (this.isset(currentPage)) {
                 this.currentPage = currentPage;
@@ -743,7 +747,11 @@ export default {
             }
         },
         handleSearchTyping: _.debounce(function (e) {
-            var keyword = this.$emit("searchInput", e, this);
+            var keyword = e.target.value;
+
+            if(this.isset(this.$listeners.onSearchInput)){
+                keyword = this.$emit("onSearchInput", e, this);
+            }
 
             if (this.isset(keyword) === false) {
                 this.isSearching = true;
@@ -817,11 +825,13 @@ export default {
                 await column.doubleClick(e, row, column);
             }
         },
-        handleRowSelect(e) {
+        handleRowSelect(e, row, index) {
             if (!e.target.checked) {
                 this.checkAll = false;
             }
-            this.$emit("onRowSelect", e.target.checked, e);
+            this.$emit("onRowSelect", e.target.checked, row, index, this.data.filter(row => {
+                return row.checked;
+            }), e);
         },
         handleCheckAll(e) {
             this.checkAll = e.target.checked;
@@ -847,29 +857,16 @@ export default {
             this.currentColumn = key;
         },
         rows() {
-            if (this.showAll) {
-                return this.data;
+            var data = this.data;
+
+            if(this.enableDataFilter){
+                data = this.filterData(data); 
             }
 
-            var data = this.data.filter((row) => {
-                if (this.keyword !== null) {
-                    var found = false;
-                    // get searchable columns
-                    for (let i = 0; i < this.columns.length; i++) {
-                        if (this.isSearchable(this.columns[i])) {
-                            if (this.search(row[this.columns[i].key])) {
-                                found = true;
-                            }
-                        }
-                    }
-                    return found;
-                }
-                return true;
-            });
+            if(this.enableDataSorting){
+                var sortKey = this.currentColumn;
 
-            if (this.sortedColumn !== null && this.realTime) {
-                var sortKey = this.sortedColumn;
-
+                // used when you are mutating
                 this.columns.find((column) => {
                     if (
                         column.key === sortKey &&
@@ -882,38 +879,16 @@ export default {
                     return false;
                 });
 
-                // sort rows by column
-                data.sort((a, b) => {
-                    if (!isNaN(a[sortKey]) && !isNaN(b[sortKey])) {
-                        if (a[sortKey] < b[sortKey]) {
-                            return this.asc ? -1 : 1;
-                        }
-                        if (a[sortKey] > b[sortKey]) {
-                            return this.asc ? 1 : -1;
-                        }
-                    } else if (
-                        moment(a[sortKey]).isValid() &&
-                        moment(b[sortKey]).isValid()
-                    ) {
-                        if (moment(a[sortKey]) - moment(b[sortKey]) > 0) {
-                            return this.asc ? -1 : 1;
-                        }
-                        if (moment(a[sortKey]) - moment(b[sortKey]) < 0) {
-                            return this.asc ? 1 : -1;
-                        }
-                    } else {
-                        if (a[sortKey] < b[sortKey]) {
-                            return this.asc ? -1 : 1;
-                        }
-                        if (a[sortKey] > b[sortKey]) {
-                            return this.asc ? 1 : -1;
-                        }
-                    }
-
-                    return 0;
-                });
+                data = this.sortData(data, sortKey);
+            }
+            
+            if(this.enableDataPagination){
+                data = this.paginate(data);
             }
 
+            return data;
+        },
+        paginate(data){
             var start = (this.currentPage - 1) * this.limit;
             var end = start + this.limit;
 
@@ -924,7 +899,7 @@ export default {
                         : this.data.length;
                 this.totalPages = Math.ceil(this.totalRows / this.limit);
             } else {
-                this.totalRows = data.length;
+                this.totalRows = this.data.length;
                 this.totalPages = Math.ceil(this.totalRows / this.limit);
             }
 
@@ -934,287 +909,74 @@ export default {
                 return data.slice(start, end);
             }
         },
+        sortData(data, sortKey) {
+            if(this.isset(this.$listeners.overrideSort)){
+                data.sort((a, b) => {
+                    return this.$emit('overrideSort', a, b, sortKey);
+                });
+            }else{
+                // // sort rows by column
+                data.sort((a, b) => {
+                    if (
+                        moment(a[sortKey]).isValid() &&
+                        moment(b[sortKey]).isValid()
+                    ) {
+                        if (moment(a[sortKey]) - moment(b[sortKey]) > 0) {
+                            return this.asc ? -1 : 1;
+                        }
+                        if (moment(a[sortKey]) - moment(b[sortKey]) < 0) {
+                            return this.asc ? 1 : -1;
+                        }
+                    }else{
+                        if (!isNaN(a[sortKey]) && !isNaN(b[sortKey])) { // is both a and b a number.
+                            if (parseFloat(a[sortKey]) < parseFloat(b[sortKey])) {
+                                return this.asc ? -1 : 1;
+                            }
+                            if (parseFloat(a[sortKey]) > parseFloat(b[sortKey])) {
+                                return this.asc ? 1 : -1;
+                            }
+                        } else {
+                            if (a[sortKey].toLowerCase() < b[sortKey].toLowerCase()) {
+                                return this.asc ? -1 : 1;
+                            }
+                            if (a[sortKey].toLowerCase() > b[sortKey].toLowerCase()) {
+                                return this.asc ? 1 : -1;
+                            }
+                        }
+
+                        if(a[sortKey].length < b[sortKey].length){
+                            return this.asc ? -1 : 1;
+                        }
+                        if(a[sortKey].length > b[sortKey].length){
+                            return this.asc ? 1 : -1;
+                        }
+                    }
+
+                    return 0;
+                });
+            }
+
+            return data;
+        },
+        filterData(data) {
+            return data.filter((row) => {
+                if (this.keyword !== null) {
+                    var found = false;
+                    // get searchable columns
+                    for (let i = 0; i < this.columns.length; i++) {
+                        if (this.isSearchable(this.columns[i]) && this.isString(this.keyword)) {
+                            if (this.search(row[this.columns[i].key], this.keyword)) {
+                                found = true;
+                            }
+                        }
+                    }
+                    return found;
+                }
+                return true;
+            });
+        },
     },
 };
 </script>
 
-<style lang="scss" scoped>
-.neo-table {
-    position: relative;
-}
-.table-container {
-    position: relative;
-    overflow: auto;
-    margin-bottom: 5px;
-    border: 1px solid #dee2e6;
-}
-.pagination {
-    .page-item.disabled,
-    .page-item.active {
-        pointer-events: none;
-    }
-}
-.table-filter {
-    margin-bottom: 5px;
-    .form-control {
-        background-color: white !important;
-    }
-}
-
-.highlight {
-    background-color: yellow !important;
-    padding: 0;
-    border-radius: 3px;
-}
-
-.fit-screen {
-    height: 100vh;
-    max-height: calc(100vh - 200px);
-    overflow-y: auto;
-    &.fs-1 {
-        max-height: calc(100vh - 190px);
-    }
-    &.fs-2 {
-        max-height: calc(100vh - 180px);
-    }
-}
-
-.ellipsis {
-    text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap;
-}
-
-.table {
-    position: relative;
-    width: 100%;
-    margin-bottom: 0;
-    border-collapse: collapse;
-    &.compact {
-        tbody,
-        thead {
-            td,
-            th,
-            th:first-child,
-            th:last-child {
-                border-top: none;
-                padding: 5px 10px;
-            }
-        }
-    }
-    thead {
-        td,
-        th,
-        th:first-child {
-            padding: 0;
-            vertical-align: middle;
-            white-space: nowrap;
-        }
-        td,
-        th {
-            position: relative;
-            border-bottom: 2px solid #dee2e6;
-            // .freeze {
-            //     position: absolute;
-            //     display: block;
-            //     width: 100%;
-            //     padding: 0;
-            //     top: 0;
-            // }
-            .column-options {
-                position: absolute;
-                left: 0;
-                padding: 0;
-                // background-color: white;
-                // border: 1px solid #dee2e6;
-                display: none;
-                box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
-            }
-            &:hover {
-                .column-options {
-                    display: block;
-                }
-            }
-        }
-        &.sticky {
-            th,
-            td {
-                position: -webkit-sticky; /* for Safari */
-                position: sticky;
-                top: 0;
-                background-color: #f9f9f9;
-                z-index: 1;
-                border-top: none;
-            }
-            th.freeze {
-                left: 0;
-                z-index: 2;
-                box-shadow: 1px 0px 0 rgba(0, 0, 0, 0.1);
-            }
-        }
-        th {
-            button:hover {
-                cursor: pointer;
-            }
-        }
-    }
-    tbody {
-        td,
-        th {
-            white-space: nowrap;
-        }
-        &.sticky {
-            th.freeze,
-            td.freeze {
-                position: -webkit-sticky; /* for Safari */
-                position: sticky;
-                left: 0;
-                background-color: inherit;
-                z-index: 1;
-                border-left: none;
-                box-shadow: 1px 0px 0 rgba(0, 0, 0, 0.1);
-            }
-        }
-    }
-    &.editable {
-        tbody {
-            td {
-                border-top: none;
-                padding: 0;
-                .btn,
-                .form-control {
-                    margin: 3px 0;
-                }
-            }
-        }
-    }
-}
-
-.noevents {
-    pointer-events: none;
-}
-
-.custom-switch {
-    &:hover,
-    > *:hover {
-        cursor: pointer;
-    }
-}
-
-.w-full {
-    width: 100%;
-}
-
-.text-only {
-    word-break: break-all;
-    // white-space: nowrap;
-}
-
-table {
-    .is-divider {
-        border-right: 1px solid #dee2e6;
-    }
-    thead {
-        th {
-            padding: 0;
-            vertical-align: middle;
-            white-space: nowrap;
-            > button {
-                border: none;
-                background-color: transparent;
-                display: block;
-                outline: none;
-                width: 100%;
-                text-align: left;
-                padding: 0.5em;
-                text-align: inherit;
-                color: inherit;
-                i {
-                    // float: right;
-                    // transform: translate(-10px, calc(50% - 3px));
-                    color: #aaa;
-                }
-                &:hover {
-                    background-color: rgba(175, 175, 175, 0.3);
-                }
-            }
-            &.checkboxes:first-child {
-                padding: 0.5em 0.75rem;
-            }
-            span {
-                padding: 0.5em;
-                font-weight: normal;
-                display: block;
-                i {
-                    color: #aaa;
-                }
-            }
-            .btn {
-                i {
-                    color: inherit;
-                }
-            }
-        }
-    }
-    tbody {
-        tr {
-            &:nth-child(even) {
-                background-color: #e9ecf3;
-            }
-            &:nth-child(odd) {
-                background-color: white;
-            }
-            &:hover {
-                background-color: #bae3ef;
-            }
-        }
-        td {
-            padding: 0;
-            vertical-align: middle;
-            .btn {
-                color: #888;
-            }
-            span {
-                padding: 7px 5px;
-                text-align: inherit;
-                display: inline-block;
-            }
-            div {
-                text-align: inherit;
-            }
-            input {
-                &[type="text"] {
-                    display: block;
-                    width: 100%;
-                }
-                &[type="text"],
-                &[type="number"] {
-                    background-color: transparent;
-                    border: 2px solid transparent;
-                    padding: 4px 5px;
-                    text-align: inherit;
-                    cursor: pointer;
-                    width: 100%;
-                    &:focus {
-                        outline: none;
-                        cursor: pointer;
-                    }
-                    &:not([readonly]):focus {
-                        background-color: white;
-                        outline: 3px solid #bedef4;
-                        cursor: default;
-                        outline-color: #bedef4;
-                        outline-width: 3px;
-                    }
-                }
-            }
-        }
-    }
-}
-.custom-switch:hover,
-.custom-checkbox:hover {
-    label {
-        cursor: pointer;
-    }
-}
-</style>
+<style lang="scss" scoped></style>

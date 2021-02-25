@@ -71,4 +71,16 @@ module.exports = {
         type: String,
         default: null,
     },
+    enableDataFilter: {
+        type: Boolean,
+        default: true,
+    },
+    enableDataSorting: {
+        type: Boolean,
+        default: true,
+    },
+    enableDataPagination: {
+        type: Boolean,
+        default: true,
+    },
 };

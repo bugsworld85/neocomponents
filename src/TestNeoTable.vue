@@ -1,7 +1,6 @@
 <template>
     <div class="col-md-12">
         <neo-table
-            :showAll="true"
             :data="products"
             :columns="columns"
             :multipleRows="false"
@@ -10,6 +9,7 @@
             :freezeColumn="2"
             :enableSearch="false"
             sortedColumn="name"
+            :enableDataPagination="false"
         ></neo-table>
         <neo-window
             title="Edit Notes"
@@ -24,11 +24,13 @@
 </template>
 
 <script>
+import Vue from "vue";
 import TestData from "./tests/data.js";
 import NeoTable from "./components/Table.vue";
 import NeoWindow from "./components/Window.vue";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "font-awesome/css/font-awesome.min.css";
+import "./assets/scss/neocomponents.scss";
 
 export default {
     name: "TestNeoTable",
@@ -91,12 +93,17 @@ export default {
                     sortable: true,
                 },
                 {
+                    key: "updated_at",
+                    title: "Updated At",
+                    sortable: true,
+                },
+                {
                     key: "actions",
                     type: "actions",
                     textAlign: "right",
                     width: 10,
                     actions: [
-                        window.Vue.component("view-product", {
+                        Vue.component("view-product", {
                             template: `<a class="btn" :href="link"><i class="fa fa-edit"></i></a>`,
                             props: ["column", "row"],
                             computed: {

@@ -1,6 +1,6 @@
 {
     "name": "@bugsworld85/neocomponents",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "private": false,
     "scripts": {
         "serve": "vue-cli-service serve",
@@ -24,13 +24,6 @@
         "sass-loader": "^8.0.0",
         "vue": "^2.6.12",
         "vue-template-compiler": "^2.6.12"
-    },
-    "config": {
-        "resolve": {
-            "alias": {
-                "vue$": "vue/dist/vue.esm.js"
-            }
-        }
     },
     "license": "MIT",
     "main": "./dist/neo-components.common.js",

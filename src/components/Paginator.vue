@@ -163,41 +163,4 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-#paginator {
-    display: flex;
-    align-items: center;
-    .paginator-info {
-        width: auto;
-        margin-left: 15px;
-    }
-}
-.paginator {
-    display: flex;
-    align-items: center;
-    padding: 0;
-    list-style: none;
-    margin: 0;
-    .page-link:hover {
-        cursor: pointer;
-    }
-    .page-item {
-        margin-right: 0;
-        .page-link {
-            border-color: #ccc !important;
-            color: #3f2171 !important;
-        }
-        &.disabled .page-link {
-            background-color: #e8e8e8 !important;
-            color: #bbb !important;
-        }
-        &.active {
-            pointer-events: none;
-            .page-link {
-                background-color: #dc148a !important;
-                color: white !important;
-            }
-        }
-    }
-}
-</style>
+<style lang="scss" scoped></style>

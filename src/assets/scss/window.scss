@@ -1,0 +1,105 @@
+.window {
+    position: fixed;
+    // top: calc(100% / 4);
+    // right: 40px;
+    background-color: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    border: 1px solid #dedede;
+    border-radius: 5px;
+    overflow: hidden;
+    z-index: 9999;
+    &.large {
+        max-width: calc(100vw - 40px);
+        width: 100%;
+    }
+    &.medium {
+        max-width: 400px;
+        width: 100%;
+    }
+    &.normal {
+        max-width: 600px;
+        width: 100%;
+    }
+    &.small {
+        max-width: 250px;
+        width: 100%;
+    }
+    &.top-right {
+        top: 40px;
+        right: 40px;
+    }
+    &.top-left {
+        top: 40px;
+        left: 40px;
+    }
+    &.bottom-right {
+        bottom: 40px;
+        right: 40px;
+    }
+    &.bottom-left {
+        bottom: 40px;
+        left: 40px;
+    }
+    .header {
+        cursor: move;
+        background-color: white;
+        display: flex;
+        .title {
+            padding: 3px 5px;
+            width: 100%;
+            font-size: inherit;
+        }
+    }
+    &.grab {
+        .header {
+            cursor: grabbing;
+        }
+    }
+    .controls {
+        display: block;
+        width: auto;
+        white-space: nowrap;
+        button {
+            display: inline-block;
+            vertical-align: top;
+            width: 29px;
+            padding: 3px 5px;
+            box-shadow: none;
+            i {
+                display: none;
+                &:first-child {
+                    display: block;
+                }
+            }
+        }
+    }
+    &.minimize {
+        bottom: 0 !important;
+        top: initial !important;
+        height: 30px;
+        overflow: hidden;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+        .controls {
+            button {
+                i {
+                    &:first-child {
+                        display: none;
+                    }
+                    &:last-child {
+                        display: block;
+                    }
+                }
+            }
+        }
+    }
+    .body {
+        padding-top: 10px;
+        padding-bottom: 10px;
+        position: relative;
+        overflow-y: auto;
+    }
+    .footer {
+        padding: 10px 15px;
+    }
+}

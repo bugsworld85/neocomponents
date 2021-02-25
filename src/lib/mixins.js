@@ -21,13 +21,13 @@ module.exports = [
 
                 return formatter.format(value);
             },
-            search(value) {
+            search(value, keyword) {
                 if (this.isset(value)) {
                     return (
                         value
                             .toLowerCase()
                             .search(
-                                this.keyword.replace(/\\|\//g, "").toLowerCase()
+                                keyword.replace(/\\|\//g, "").toLowerCase()
                             ) > -1
                     );
                 }
