@@ -79,9 +79,7 @@ module.exports = [
             },
             getTitle(column) {
                 if (this.isString(column)) {
-                    return column
-                        .toLowerCase()
-                        .replace(/(?<= )[^\s]|^./g, (a) => a.toUpperCase());
+                    return column.charAt(0).toUpperCase() + column.slice(1)
                 }
                 return this.isset(column.title) ? column.title : "";
             },
