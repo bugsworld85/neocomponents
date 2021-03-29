@@ -112,8 +112,14 @@
                 }
             }
             th {
-                button:hover {
-                    cursor: pointer;
+                button{
+                    > span {
+                        display: inline-block;
+                        padding: 0;
+                    }
+                    &:hover {
+                        cursor: pointer;
+                    }
                 }
             }
         }
@@ -192,6 +198,7 @@
                         // float: right;
                         // transform: translate(-10px, calc(50% - 3px));
                         color: #aaa;
+                        margin-left: 5px;
                     }
                     &:hover {
                         background-color: rgba(175, 175, 175, 0.3);

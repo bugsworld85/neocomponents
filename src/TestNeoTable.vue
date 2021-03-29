@@ -10,6 +10,7 @@
             :enableSearch="false"
             sortedColumn="name"
             :enableDataPagination="false"
+            :searchedKeyword="`peter`"
         ></neo-table>
         <neo-window
             title="Edit Notes"
@@ -20,6 +21,7 @@
         >
             This is a test
         </neo-window>
+        <neo-paginator></neo-paginator>
     </div>
 </template>
 
@@ -28,6 +30,7 @@ import Vue from "vue";
 import TestData from "./tests/data.js";
 import NeoTable from "./components/Table.vue";
 import NeoWindow from "./components/Window.vue";
+import NeoPaginator from "./components/Paginator.vue";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "font-awesome/css/font-awesome.min.css";
 import "./assets/scss/neocomponents.scss";
@@ -35,11 +38,12 @@ import "./assets/scss/neocomponents.scss";
 export default {
     name: "TestNeoTable",
     props: {
-        msg: String,
+        msg: String
     },
     components: {
         NeoTable,
-        NeoWindow
+        NeoWindow,
+        NeoPaginator
     },
     data() {
         return {
@@ -50,52 +54,52 @@ export default {
                     title: "SKU",
                     searchable: true,
                     sortable: true,
-                    freeze: true,
+                    freeze: true
                 },
                 {
                     key: "your_sku",
                     title: "Your SKU",
                     searchable: true,
-                    sortable: true,
+                    sortable: true
                 },
                 {
                     key: "name",
                     title: "Name",
                     searchable: true,
                     sortable: true,
-                    freeze: true,
+                    freeze: true
                 },
                 {
                     key: "brand_name",
                     title: "Brand",
                     searchable: true,
                     sortable: true,
-                    freeze: true,
+                    freeze: true
                 },
                 {
                     key: "barcode",
                     title: "Barcode",
-                    searchable: true,
+                    searchable: true
                 },
                 {
                     key: "case_size",
                     title: "Case Size",
-                    sortable: true,
+                    sortable: true
                 },
                 {
                     key: "cases_per_layer",
                     title: "Cases / Layer",
-                    sortable: true,
+                    sortable: true
                 },
                 {
                     key: "status",
                     title: "Status",
-                    sortable: true,
+                    sortable: true
                 },
                 {
                     key: "updated_at",
                     title: "Updated At",
-                    sortable: true,
+                    sortable: true
                 },
                 {
                     key: "actions",
@@ -109,28 +113,26 @@ export default {
                             computed: {
                                 link() {
                                     return "";
-                                },
+                                }
                             },
                             methods: {
                                 testClick() {
                                     console.log(this.column);
                                     console.log(this.row);
-                                },
-                            },
-                        }),
-                    ],
-                },
-            ],
+                                }
+                            }
+                        })
+                    ]
+                }
+            ]
         };
     },
-    mounted () {
+    mounted() {
         this.$refs.neoWindow.open();
     },
     methods: {
-        handleWindowClose() {
-            
-        }
-    },
+        handleWindowClose() {}
+    }
 };
 </script>
 

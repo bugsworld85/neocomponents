@@ -128,13 +128,14 @@
                                 'active-column':
                                     currentColumn === getKey(column),
                             }"
+                            :column-key="getKey(column)"
                         >
                             <button
                                 @click="handleColumnSort(getKey(column))"
                                 v-if="isSortable(column)"
                                 type="button"
                             >
-                                {{ getTitle(column) }}
+                                <span v-html="getTitle(column)">{{ getTitle(column) }}</span>
                                 <i
                                     class="fa fa-sort-up text-primary"
                                     v-if="
@@ -154,7 +155,7 @@
                                 ></i>
                             </button>
                             <span v-else-if="getType(column) !== 'divider'">
-                                {{ getTitle(column) }}
+                                <span v-html="getTitle(column)">{{ getTitle(column) }}</span>
                                 <i
                                     class="fa fa-snowflake-o"
                                     v-if="isFroze(column)"
@@ -184,6 +185,7 @@
                                             column.freeze === true,
                                     }"
                                     @click="handleFreezeSelect(column, i)"
+                                    title="Freeze Column"
                                 >
                                     <i class="fa fa-snowflake-o"></i>
                                 </button>
