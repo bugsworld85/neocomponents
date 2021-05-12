@@ -689,6 +689,8 @@ export default {
                 {}.hasOwnProperty.call(column, "message") &&
                 {}.hasOwnProperty.call(column, "confirmed")
             ) {
+                const oldValue = row[this.getKey(column)];
+
                 var value = prompt(
                     column.message,
                     this.isset(row[this.getKey(column)])
@@ -698,7 +700,7 @@ export default {
 
                 if (this.isset(value)) {
                     row[this.getKey(column)] = value;
-                    column.confirmed(value, row);
+                    column.confirmed(value, row, oldValue);
                 }
             }
         },
