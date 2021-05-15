@@ -1,9 +1,9 @@
-#paginator {
+.neo-paginator {
     display: flex;
     align-items: center;
     .paginator-info {
-        width: auto;
-        margin-left: 15px;
+        width: 100%;
+        text-align: left;
     }
     .paginator {
         display: flex;

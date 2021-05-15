@@ -1,5 +1,11 @@
 <template>
-    <div v-if="meta !== null" id="paginator">
+    <div class="neo-paginator flex">
+        <span
+            class="paginator-info"
+            v-if="typeof total !== 'undefined' && total > 0"
+        >
+            {{ `${from}-${to > total ? total : to} of ${total} ${title}` }}
+        </span>
         <div>
             <ul class="nostyle horizontal paginator" v-if="total > per_page">
                 <li
@@ -70,16 +76,6 @@
                 </li>
             </ul>
         </div>
-        <span
-            class="paginator-info"
-            v-if="meta !== null && typeof total !== 'undefined' && total > 0"
-        >
-            {{
-                `${moneyFormat(from)}-${moneyFormat(
-                    to > total ? total : to
-                )} of ${moneyFormat(total)} ${title}`
-            }}
-        </span>
     </div>
 </template>
 
@@ -90,10 +86,6 @@ export default {
         title: {
             type: String,
             default: "rows",
-        },
-        meta: {
-            type: Object,
-            default: null,
         },
         current_page: {
             type: Number,
@@ -163,4 +155,11 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.flex{
+    display: flex;
+}
+.neo-paginator{
+    width: 100%;
+}
+</style>

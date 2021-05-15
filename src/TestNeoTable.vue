@@ -23,7 +23,14 @@
         >
             This is a test
         </neo-window>
-        <neo-paginator></neo-paginator>
+        <neo-paginator
+            :current_page="meta.current_page"
+            :last_page="meta.last_page"
+            :per_page="meta.per_page"
+            :total="meta.total"
+            :to="meta.to"
+            :from="meta.from"
+        ></neo-paginator>
     </div>
 </template>
 
@@ -49,6 +56,14 @@ export default {
     },
     data() {
         return {
+            meta: {
+                current_page: 1,
+                last_page: 1,
+                per_page: 15,
+                total: 25,
+                to: 15,
+                from: 1,
+            },
             products: TestData,
             columns: [
                 {
