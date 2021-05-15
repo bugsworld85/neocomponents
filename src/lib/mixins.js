@@ -21,6 +21,9 @@ module.exports = [
 
                 return formatter.format(value);
             },
+            numberFormat(value = 0) {
+                return new Intl.NumberFormat().format(value);
+            },
             search(value, keyword) {
                 if (this.isset(value)) {
                     return (

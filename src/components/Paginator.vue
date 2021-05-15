@@ -4,7 +4,7 @@
             class="paginator-info"
             v-if="typeof total !== 'undefined' && total > 0"
         >
-            {{ `${from}-${to > total ? total : to} of ${total} ${title}` }}
+            {{ `${from}-${to > total ? total : to} of ${numberFormat(total)} ${title}` }}
         </span>
         <div>
             <ul class="nostyle horizontal paginator" v-if="total > per_page">

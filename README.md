@@ -143,7 +143,8 @@ Event | Accepts | Description
 `@onRowSelect` | `isChecked, row, index, data, event` | Fired when you selected a row via checkbox. Only when `multipleRows` is `true`. `data` contains all checked items.
 `@onCheckAll` | `isChecked, data, event` | Fired when you check column header checkbox. Only when `multipleRows` is `true`.
 `@sortClick` | `sortColumnKey, isAsc` | Fired when you click on column header title.
-`@overrideSort` | `a, b, sortColumnKey` | Overrides how data is being sort. Must return `1`, `-1`, `0`;
+`@overrideSort` | `a, b, sortColumnKey` | Overrides how data is being sort. Must return `1`, `-1`, `0`.
+`@rowClick` | `row` | Listen to row click.
 
 #### Column Properties
 Property | Type | Default | Required | Description

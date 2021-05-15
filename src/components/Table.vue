@@ -213,6 +213,7 @@
                         v-for="(row, i) in rows()"
                         :key="`row-${i}`"
                         :ref="`row${i}`"
+                        @click.prevent="handleRowClick(row)"
                     >
                         <td
                             v-if="multipleRows"
@@ -656,6 +657,9 @@ export default {
         this.updateComponents();
     },
     methods: {
+        handleRowClick: _.debounce(function(row) {
+            this.$emit('rowClick', row);
+        }),
         updateComponents() {
             if (this.$refs.thead) {
                 this.$refs.thead.childNodes.forEach((child) => {
