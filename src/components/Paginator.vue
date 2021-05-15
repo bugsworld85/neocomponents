@@ -113,6 +113,9 @@ export default {
         },
     },
     methods: {
+        numberFormat(value = 0) {
+            return new Intl.NumberFormat().format(value);
+        },
         handleClick(e, page = 1) {
             this.$emit("click", page, e);
         },
