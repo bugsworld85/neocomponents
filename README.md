@@ -159,6 +159,7 @@ Property | Type | Default | Required | Description
 `message` |  `String` | `null` | no | Message to display when column `prompt` type has been triggered.
 `confirm` |  `Function` | `null` | no | Callback function after confirming the `prompt` input.
 `type` |  `String` | `"string"` | no | `string`, `text`, `number`, `switch`, `checkbox`, `actions`, `template`, `options`, `prompt`, `divider`. Definition of each type is described below.
+`hideFreezeButton` |  `Boolean` | `"false"` | no | Hide's the freeze button from the table header.
 
 #### Column Types
 Type | Description
@@ -173,6 +174,13 @@ Type | Description
 `options` | `select` dropdown options. Accepts `Array` of `{ text, value }` objects.
 `prompt` | Opens browser input prompt.
 `divider` | A simple divider column.
+
+#### Slots
+Name | Description
+------- | ---------
+`search` | Replaces table search component.
+`filter` | Add additional components right next to table search field.
+`paginate` | Replaces the pagination data in the footer.
 
 ### Todos
 

@@ -2,7 +2,7 @@
     <div class="neo-table">
         <div class="table-filter">
             <div class="row">
-                <div class="col-md-6 flex middle">
+                <div class="col-md-6 flex middle" v-if="!hasSearchSlot">
                     <form
                         method="get"
                         ref="searchForm"
@@ -78,6 +78,8 @@
                         </div>
                     </form>
                 </div>
+                <div v-if="hasSearchSlot" class="col-md-6 flex"><slot name="search"></slot></div>
+                <div v-if="hasFilterSlot" class="col-md-6 flex"><slot name="filter"></slot></div>
             </div>
         </div>
         <div
@@ -171,6 +173,7 @@
                                 <button
                                     type="button"
                                     class="btn btn-sm"
+                                    v-if="(!isset(column.hideFreezeButton) || (isset(column.hideFreezeButton) && column.hideFreezeButton === false))"
                                     :class="{
                                         'btn-light':
                                             isset(column.freeze) &&
@@ -411,7 +414,7 @@
             </table>
         </div>
         <div class="table-footer">
-            <div class="row" v-if="enableDataPagination">
+            <div class="row" v-if="enableDataPagination && !hasPaginateSlot">
                 <div class="col-md-4 text-left">
                     <span
                         class="nowrap ml-2"
@@ -531,6 +534,7 @@
                     </nav>
                 </div>
             </div>
+            <div v-if="hasPaginateSlot" class="row"><slot name="paginate"></slot></div>
         </div>
     </div>
 </template>
@@ -550,6 +554,15 @@ export default {
     filters,
     props,
     computed: {
+        hasPaginateSlot() {
+            return !!this.$slots['paginate'];
+        },
+        hasSearchSlot() {
+            return !!this.$slots['search'];
+        },
+        hasFilterSlot() {
+            return !!this.$slots['filter'];
+        },
         maxPages() {
             var pages = [];
             var start = 1;

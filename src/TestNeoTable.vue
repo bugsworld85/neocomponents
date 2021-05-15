@@ -7,11 +7,13 @@
             :limit="25"
             maxHeight="600px"
             :freezeColumn="2"
-            :enableSearch="false"
             sortedColumn="name"
-            :enableDataPagination="false"
             :searchedKeyword="`peter`"
-        ></neo-table>
+        >
+            <template v-slot:search>test</template>
+            <template v-slot:filter>test filter</template>
+            <template v-slot:paginate>test paginate</template>
+        </neo-table>
         <neo-window
             title="Edit Notes"
             ref="neoWindow"
@@ -79,7 +81,8 @@ export default {
                 {
                     key: "barcode",
                     title: "Barcode",
-                    searchable: true
+                    searchable: true,
+                    hideFreezeButton: true,
                 },
                 {
                     key: "case_size",
