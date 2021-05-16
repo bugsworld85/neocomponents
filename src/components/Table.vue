@@ -78,8 +78,10 @@
                         </div>
                     </form>
                 </div>
-                <div v-if="hasSearchSlot" class="col-md-6 flex"><slot name="search"></slot></div>
-                <div v-if="hasFilterSlot" class="col-md-6 flex"><slot name="filter"></slot></div>
+                <div class="col-md-12" v-if="hasSearchSlot || hasFilterSlot">
+                    <div v-if="hasSearchSlot" class="flex"><slot name="search"></slot></div>
+                    <div v-if="hasFilterSlot" class="flex"><slot name="filter"></slot></div>
+                </div>
             </div>
         </div>
         <div
