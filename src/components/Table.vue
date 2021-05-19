@@ -249,6 +249,7 @@
                                 'is-divider': getType(column) === 'divider',
                                 freeze: isFroze(column),
                             }"
+                            :column-key="getKey(column)"
                         >
                             <input
                                 type="text"
