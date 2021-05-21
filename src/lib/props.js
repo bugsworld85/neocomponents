@@ -39,9 +39,9 @@ module.exports = {
         type: Boolean,
         default: true,
     },
-    multipleRows: {
+    allowMultipleRowSelection: {
         type: Boolean,
-        default: true,
+        default: false,
     },
     exludeColumns: {
         type: Array,
@@ -73,14 +73,14 @@ module.exports = {
     },
     enableDataFilter: {
         type: Boolean,
-        default: true,
+        default: false,
     },
     enableDataSorting: {
         type: Boolean,
-        default: true,
+        default: false,
     },
     enableDataPagination: {
         type: Boolean,
-        default: true,
+        default: false,
     },
 };

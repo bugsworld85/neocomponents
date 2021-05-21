@@ -82,6 +82,9 @@
                     <div v-if="hasSearchSlot" class="flex"><slot name="search"></slot></div>
                     <div v-if="hasFilterSlot" class="flex"><slot name="filter"></slot></div>
                 </div>
+                <div class="col-md-12" v-if="hasBeforeTableSlot">
+                    <slot name="before-table"></slot>
+                </div>
             </div>
         </div>
         <div
@@ -96,7 +99,7 @@
                 >
                     <tr>
                         <th
-                            v-if="multipleRows"
+                            v-if="allowMultipleRowSelection"
                             width="10"
                             class="checkboxes"
                             :class="{
@@ -119,7 +122,7 @@
                         </th>
                         <th
                             v-for="(column, i) in tableColumns"
-                            :key="`column-${getKey(column)}`"
+                            :key="`thead-col-${i}`"
                             :width="getWidth(column)"
                             :style="{
                                 textAlign: isset(column.textAlign)
@@ -153,10 +156,6 @@
                                     "
                                 ></i>
                                 <i class="fa fa-sort" v-else></i>
-                                <i
-                                    class="fa fa-snowflake-o"
-                                    v-if="isFroze(column)"
-                                ></i>
                             </button>
                             <span v-else-if="getType(column) !== 'divider'">
                                 <span v-html="getTitle(column)">{{ getTitle(column) }}</span>
@@ -175,7 +174,7 @@
                                 <button
                                     type="button"
                                     class="btn btn-sm"
-                                    v-if="(!isset(column.hideFreezeButton) || (isset(column.hideFreezeButton) && column.hideFreezeButton === false))"
+                                    v-if="!isset(column.disableFreezing) || (isset(column.disableFreezing) && column.disableFreezing === false)"
                                     :class="{
                                         'btn-light':
                                             isset(column.freeze) &&
@@ -188,6 +187,7 @@
                                         'btn-primary':
                                             isset(column.freeze) &&
                                             column.freeze === true,
+                                        'is-freeze': isFroze(column)
                                     }"
                                     @click="handleFreezeSelect(column, i)"
                                     title="Freeze Column"
@@ -223,7 +223,7 @@
                         @click.prevent="handleRowClick(row)"
                     >
                         <td
-                            v-if="multipleRows"
+                            v-if="allowMultipleRowSelection"
                             :class="{
                                 freeze: freezeColumn === 0,
                             }"
@@ -243,8 +243,8 @@
                             </div>
                         </td>
                         <td
-                            v-for="column in tableColumns"
-                            :key="`col-${getKey(column)}`"
+                            v-for="(column, j) in tableColumns"
+                            :key="`row-${i}-col-${j}`"
                             :style="{
                                 textAlign: isset(column.textAlign)
                                     ? column.textAlign
@@ -550,13 +550,19 @@
 </template>
 
 <script>
-import _ from "lodash";
-import moment from "moment";
 import mixins from "../lib/mixins.js";
 import filters from "../lib/filters.js";
 import props from "../lib/props.js";
 // import "font-awesome/css/font-awesome.min.css";
 // import "../assets/scss/table.scss";
+
+if(typeof _ === 'undefined' || _ === null){
+    window._ = require("lodash");
+}
+
+if(typeof moment === 'undefined' || moment === null){
+    window.moment = require("moment");
+}
 
 export default {
     name: "neo-table",
@@ -564,6 +570,9 @@ export default {
     filters,
     props,
     computed: {
+        hasBeforeTableSlot() {
+            return !!this.$slots['before-table'];
+        },
         hasLoadingSlot() {
             return !!this.$slots['loading'];
         },
@@ -708,6 +717,9 @@ export default {
             }
         },
         isFroze(column) {
+            if(column.disableFreezing){
+                return false;
+            }
             return this.isset(column.freeze) && column.freeze
                 ? column.freeze
                 : false;

@@ -11,8 +11,9 @@
             :searchedKeyword="`peter`"
             ref="neoTable"
         >
-            <template v-slot:search>test</template>
+            <template v-slot:search>test search</template>
             <template v-slot:filter>test filter</template>
+            <template v-slot:before-table>before table</template>
             <template v-slot:paginate>test paginate</template>
             <template v-slot:loading>
                 <div>
@@ -153,7 +154,7 @@ export default {
     },
     mounted() {
         this.$refs.neoWindow.open();
-        this.$refs.neoTable.setLoading(true);
+        // this.$refs.neoTable.setLoading(true);
     },
     methods: {
         handleWindowClose() {}

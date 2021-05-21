@@ -1,1 +1,12 @@
-#### 0.3.1 (2021-02-03)
+#### 0.1.16 (2021-05-22)
+- `key` column property no longer required.
+- `hideFreezeButton` column property changed to `disableFreezing`
+- `multipleRows` changed to `allowMultipleRowSelection`
+- `enableSearch` default to `false`
+- `enableDataFilter` default to `false`
+- `enableDataSorting` default to `false`
+- `enableDataPagination` default to `false`
+- added `@mounted` event hook
+- added `before-table` slot
+- column options placed on the right side of the column header
+- enhanced column options hovering experience

@@ -82,16 +82,27 @@
                 // }
                 .column-options {
                     position: absolute;
-                    left: 0;
+                    right: 0;
+                    top: 50%;
+                    transform: translate(0, -50%);
                     padding: 0;
                     // background-color: white;
                     // border: 1px solid #dee2e6;
-                    display: none;
+                    // display: none;
                     box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+                    .btn{
+                        display: none;
+                    }
+                    .is-freeze{
+                        display: block;
+                    }
                 }
                 &:hover {
                     .column-options {
-                        display: block;
+                        // display: block;
+                        .btn{
+                            display: block;
+                        }
                     }
                 }
             }

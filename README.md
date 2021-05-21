@@ -117,21 +117,21 @@ Name | Type | Default | Description
 `columns` |  `Array` | `[]` | Define column properties, cell value mutation or event callbacks.
 `data` |  `Array` | `[]` | Data to be inserted into the table.
 `emptyMessage` |  `String` | `"No data available"` | Message to display if data is empty.
-`enableSearch` |  `Boolean` | `true` | Enable and display search field. Searches from given `data` only.
+`enableSearch` |  `Boolean` | `false` | Enable and display search field. Searches from given `data` only.
 `exludeColumns` |  `Array` | `[]` | Exclude properties from given `data`.
 `freezeColumn` |  `Integer` | `0` | Freeze number of columns starting from first column with index `0`.
 `isAsc` |  `Boolean` | `true` | Sort direction. Ascending if `true`, descending if `false`
 `limit` |  `Integer` | `15` | Number of data to be displayed in each pagination.
 `loadingMessage` |  `String` | `"Loading..."` | Message to display when `data` is being loaded.
 `maxHeight` |  `Integer` | `null` | The maximum height of the table. Screen height by default.
-`multipleRows` |  `Boolean` | `true` | Enable multiple row selection.
-`page` |  `Integer` | `1` | Page to display if `showAll` is `false` and pagination is present.
+`allowMultipleRowSelection` |  `Boolean` | `true` | Enable multiple row selection.
+`page` |  `Integer` | `1` | @deprecated Page to display if `showAll` is `false` and pagination is present.
 `placeholder` |  `String` | `"Search for..."` | Placeholder text on search input field.
 `searchedKeyword` |  `String` | `null` | The search keyword string.
-`enableDataFilter` |  `Boolean` | `true` | Enable or disable built-in data filtration. Useful if you are just passing data and does the filtration manually.
-`enableDataSorting` |  `Boolean` | `true` | Enable or disable built-in data table sorting. Useful if you are sorting data manually.
-`enableDataPagination` |  `Boolean` | `true` | Enable or disable built-in data pagination. Useful if you are paginating data manually.
-`sortedColumn` |  `String` | `null` | The column to be sorted accordingly.
+`enableDataFilter` |  `Boolean` | `false` | @deprecated Enable or disable built-in data filtration. Useful if you are just passing data and does the filtration manually.
+`enableDataSorting` |  `Boolean` | `false` | @deprecated Enable or disable built-in data table sorting. Useful if you are sorting data manually.
+`enableDataPagination` |  `Boolean` | `false` | @deprecated Enable or disable built-in data pagination. Useful if you are paginating data manually.
+`sortedColumn` |  `String` | `null` | The sorted column.
 `totalTableRows` |  `Integer` | `0` | The length of data.
 
 #### Component Events
@@ -145,6 +145,7 @@ Event | Accepts | Description
 `@sortClick` | `sortColumnKey, isAsc` | Fired when you click on column header title.
 `@overrideSort` | `a, b, sortColumnKey` | Overrides how data is being sort. Must return `1`, `-1`, `0`.
 `@rowClick` | `row` | Listen to row click.
+`@mounted` | `NeoTable` | Hook when NeoTable is mounted.
 
 #### Column Properties
 Property | Type | Default | Required | Description
@@ -160,7 +161,7 @@ Property | Type | Default | Required | Description
 `message` |  `String` | `null` | no | Message to display when column `prompt` type has been triggered.
 `confirm` |  `Function` | `null` | no | Callback function after confirming the `prompt` input.
 `type` |  `String` | `"string"` | no | `string`, `text`, `number`, `switch`, `checkbox`, `actions`, `template`, `options`, `prompt`, `divider`. Definition of each type is described below.
-`hideFreezeButton` |  `Boolean` | `"false"` | no | Hide's the freeze button from the table header.
+`disableFreezing` |  `Boolean` | `"false"` | no | Hide's the freeze button from the table header.
 
 #### Column Types
 Type | Description
@@ -181,6 +182,7 @@ Name | Description
 ------- | ---------
 `search` | Replaces table search component.
 `filter` | Add additional components right next to table search field.
+`before-table` | Add additional components before table.
 `paginate` | Replaces the pagination data in the footer.
 
 ### Todos
