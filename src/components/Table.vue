@@ -88,7 +88,7 @@
             class="table-container"
             :style="{ maxHeight: maxHeight !== null ? maxHeight : 'initial' }"
         >
-            <table class="table">
+            <table class="table" ref="table">
                 <thead
                     v-if="tableColumns.length > 0"
                     class="sticky"
@@ -200,8 +200,13 @@
                 </thead>
                 <tbody v-if="loading || searching">
                     <tr>
-                        <td :colspan="tableColumns.length + 1" v-if="loading">
-                            {{ loadingMessage }}
+                        <td :colspan="tableColumns.length + 1" v-if="loading" class="loading-container">
+                            <div v-if="hasLoadingSlot" class="table-loading">
+                                <slot name="loading"></slot>
+                            </div>
+                            <span v-else>
+                                {{ loadingMessage }}
+                            </span>
                         </td>
                         <td :colspan="tableColumns.length + 1" v-else>
                             Searching
@@ -416,6 +421,7 @@
                     </tr>
                 </tbody>
             </table>
+            
         </div>
         <div class="table-footer">
             <div class="row" v-if="enableDataPagination && !hasPaginateSlot">
@@ -558,6 +564,9 @@ export default {
     filters,
     props,
     computed: {
+        hasLoadingSlot() {
+            return !!this.$slots['loading'];
+        },
         hasPaginateSlot() {
             return !!this.$slots['paginate'];
         },
@@ -655,11 +664,15 @@ export default {
         if (this.isset(this.sortedColumn)) {
             this.currentColumn = this.sortedColumn;
         }
+        this.$emit('mounted', this);
     },
     updated() {
         this.updateComponents();
     },
     methods: {
+        setLoading(loading = true) {
+            this.loading = loading;
+        },
         handleRowClick: _.debounce(function(row) {
             this.$emit('rowClick', row);
         }),
@@ -1003,4 +1016,14 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.table-loading{
+    min-height: 300px;
+    display: flex;
+    width: 100%;
+    align-items: center;
+    > div{
+        width: 100%;
+    }
+}
+</style>

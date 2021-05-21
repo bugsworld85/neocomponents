@@ -9,10 +9,16 @@
             :freezeColumn="2"
             sortedColumn="name"
             :searchedKeyword="`peter`"
+            ref="neoTable"
         >
             <template v-slot:search>test</template>
             <template v-slot:filter>test filter</template>
             <template v-slot:paginate>test paginate</template>
+            <template v-slot:loading>
+                <div>
+                    testing
+                </div>
+            </template>
         </neo-table>
         <neo-window
             title="Edit Notes"
@@ -147,6 +153,7 @@ export default {
     },
     mounted() {
         this.$refs.neoWindow.open();
+        this.$refs.neoTable.setLoading(true);
     },
     methods: {
         handleWindowClose() {}
