@@ -1,4 +1,7 @@
 #### 0.1.17 (2021-05-22)
+- Removed freeze indicator when freeze is triggered.
+
+#### 0.1.17 (2021-05-22)
 - Fixed switch not working.
 
 #### 0.1.16 (2021-05-22)

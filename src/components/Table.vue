@@ -159,10 +159,6 @@
                             </button>
                             <span v-else-if="getType(column) !== 'divider'">
                                 <span v-html="getTitle(column)">{{ getTitle(column) }}</span>
-                                <i
-                                    class="fa fa-snowflake-o"
-                                    v-if="isFroze(column)"
-                                ></i>
                             </span>
                             <span
                                 v-if="
@@ -192,7 +188,7 @@
                                     @click="handleFreezeSelect(column, i)"
                                     title="Freeze Column"
                                 >
-                                    <i class="fa fa-snowflake-o"></i>
+                                    <i class="fa fa-snowflake-o fa-snowflake"></i>
                                 </button>
                             </span>
                         </th>
