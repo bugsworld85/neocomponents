@@ -37,7 +37,7 @@ module.exports = {
     },
     enableSearch: {
         type: Boolean,
-        default: true,
+        default: false,
     },
     allowMultipleRowSelection: {
         type: Boolean,

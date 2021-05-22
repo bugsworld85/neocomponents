@@ -3,7 +3,6 @@
         <neo-table
             :data="products"
             :columns="columns"
-            :multipleRows="false"
             :limit="25"
             maxHeight="600px"
             :freezeColumn="2"
@@ -92,6 +91,16 @@ export default {
                     searchable: true,
                     sortable: true,
                     freeze: true
+                },
+                {
+                    key: "active",
+                    title: "Active",
+                    sortable: true,
+                    type: 'switch',
+                    textAlign: 'center',
+                    change: (e) => {
+                        console.log(e.target.checked);
+                    }
                 },
                 {
                     key: "brand_name",

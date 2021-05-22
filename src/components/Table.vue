@@ -220,7 +220,7 @@
                         v-for="(row, i) in rows()"
                         :key="`row-${i}`"
                         :ref="`row${i}`"
-                        @click.prevent="handleRowClick(row)"
+                        @click="handleRowClick(row)"
                     >
                         <td
                             v-if="allowMultipleRowSelection"
@@ -305,15 +305,16 @@
                                 <input
                                     type="checkbox"
                                     class="custom-control-input"
+                                    :value="`${getKey(column)}`"
                                     v-model="row[getKey(column)]"
-                                    :id="`row-${i}-col-${getKey(column)}`"
+                                    :id="`row-${i}-col-${j}-${getKey(column)}`"
                                     @change="
                                         handleInputChange($event, column, row)
                                     "
                                 />
                                 <label
                                     class="custom-control-label"
-                                    :for="`row-${i}-col-${getKey(column)}`"
+                                    :for="`row-${i}-col-${j}-${getKey(column)}`"
                                 ></label>
                             </div>
                             <div v-else-if="getType(column) === 'options'">
@@ -814,10 +815,11 @@ export default {
             this.currentPage = 1;
         }, 500),
         handleInputChange(e, column, row) {
+            console.log(e.target);
             if (
                 !this.isString(column) &&
                 {}.hasOwnProperty.call(column, "change") &&
-                e.target.readOnly === false
+                e.target.readOnly !== false
             ) {
                 column.change(e, row, column);
             }
@@ -1029,6 +1031,38 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.custom-switch{
+    padding: 0;
+    width: 1.75rem;
+    display: inline-block;
+    min-height: 1rem;
+    height: 1rem;
+    .custom-control-input{
+        width: 100%;
+        z-index: 1;
+        height: 1rem;
+        &:checked{
+            & ~.custom-control-label{
+                &:after{
+                    transform: translate(100%, -50%);
+                }
+            }
+        }
+    }
+    .custom-control-label{
+        height: 1rem;
+        &:before{
+            top: 0;
+            left: 0;
+            position: relative;
+        }
+        &:after{
+            left: 2px;
+            top: 50%;
+            transform: translate(0, -50%);
+        }
+    }
+}
 .table-loading{
     min-height: 300px;
     display: flex;

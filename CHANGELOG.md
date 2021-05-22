@@ -1,3 +1,6 @@
+#### 0.1.17 (2021-05-22)
+- Fixed switch not working.
+
 #### 0.1.16 (2021-05-22)
 - `key` column property no longer required.
 - `hideFreezeButton` column property changed to `disableFreezing`

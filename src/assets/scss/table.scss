@@ -113,12 +113,12 @@
                     position: sticky;
                     top: 0;
                     background-color: #f9f9f9;
-                    z-index: 1;
+                    z-index: 2;
                     border-top: none;
                 }
                 th.freeze {
                     left: 0;
-                    z-index: 2;
+                    z-index: 3;
                     box-shadow: 1px 0px 0 rgba(0, 0, 0, 0.1);
                 }
             }
@@ -146,7 +146,7 @@
                     position: sticky;
                     left: 0;
                     background-color: inherit;
-                    z-index: 1;
+                    z-index: 2;
                     border-left: none;
                     box-shadow: 1px 0px 0 rgba(0, 0, 0, 0.1);
                 }
