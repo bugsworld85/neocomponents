@@ -811,11 +811,10 @@ export default {
             this.currentPage = 1;
         }, 500),
         handleInputChange(e, column, row) {
-            console.log(e.target);
             if (
                 !this.isString(column) &&
                 {}.hasOwnProperty.call(column, "change") &&
-                e.target.readOnly !== false
+                e.target.readOnly === false
             ) {
                 column.change(e, row, column);
             }
