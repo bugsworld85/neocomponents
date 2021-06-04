@@ -219,11 +219,13 @@
                     padding: 0.5em 0.75rem;
                 }
                 span {
-                    padding: 0.5em;
-                    font-weight: normal;
-                    display: block;
-                    i {
-                        color: #aaa;
+                    span {
+                        padding: 0.5em;
+                        font-weight: normal;
+                        display: block;
+                        i {
+                            color: #aaa;
+                        }
                     }
                 }
                 .btn {
