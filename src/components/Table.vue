@@ -79,8 +79,12 @@
                     </form>
                 </div>
                 <div class="col-md-12" v-if="hasSearchSlot || hasFilterSlot">
-                    <div v-if="hasSearchSlot" class="flex"><slot name="search"></slot></div>
-                    <div v-if="hasFilterSlot" class="flex"><slot name="filter"></slot></div>
+                    <div v-if="hasSearchSlot" class="flex">
+                        <slot name="search"></slot>
+                    </div>
+                    <div v-if="hasFilterSlot" class="flex">
+                        <slot name="filter"></slot>
+                    </div>
                 </div>
                 <div class="col-md-12" v-if="hasBeforeTableSlot">
                     <slot name="before-table"></slot>
@@ -142,7 +146,9 @@
                                 v-if="isSortable(column)"
                                 type="button"
                             >
-                                <span v-html="getTitle(column)">{{ getTitle(column) }}</span>
+                                <span v-html="getTitle(column)">{{
+                                    getTitle(column)
+                                }}</span>
                                 <i
                                     class="fa fa-sort-up text-primary"
                                     v-if="
@@ -158,7 +164,9 @@
                                 <i class="fa fa-sort" v-else></i>
                             </button>
                             <span v-else-if="getType(column) !== 'divider'">
-                                <span v-html="getTitle(column)">{{ getTitle(column) }}</span>
+                                <span v-html="getTitle(column)">{{
+                                    getTitle(column)
+                                }}</span>
                             </span>
                             <span
                                 v-if="
@@ -170,7 +178,11 @@
                                 <button
                                     type="button"
                                     class="btn btn-sm"
-                                    v-if="!isset(column.disableFreezing) || (isset(column.disableFreezing) && column.disableFreezing === false)"
+                                    v-if="
+                                        !isset(column.disableFreezing) ||
+                                        (isset(column.disableFreezing) &&
+                                            column.disableFreezing === false)
+                                    "
                                     :class="{
                                         'btn-light':
                                             isset(column.freeze) &&
@@ -183,12 +195,14 @@
                                         'btn-primary':
                                             isset(column.freeze) &&
                                             column.freeze === true,
-                                        'is-freeze': isFroze(column)
+                                        'is-freeze': isFroze(column),
                                     }"
                                     @click="handleFreezeSelect(column, i)"
                                     title="Freeze Column"
                                 >
-                                    <i class="fa fa-snowflake-o fa-snowflake"></i>
+                                    <i
+                                        class="fa fa-snowflake-o fa-snowflake"
+                                    ></i>
                                 </button>
                             </span>
                         </th>
@@ -196,7 +210,11 @@
                 </thead>
                 <tbody v-if="loading || searching">
                     <tr>
-                        <td :colspan="tableColumns.length + 1" v-if="loading" class="loading-container">
+                        <td
+                            :colspan="tableColumns.length + 1"
+                            v-if="loading"
+                            class="loading-container"
+                        >
                             <div v-if="hasLoadingSlot" class="table-loading">
                                 <slot name="loading"></slot>
                             </div>
@@ -206,206 +224,25 @@
                         </td>
                         <td :colspan="tableColumns.length + 1" v-else>
                             Searching
-                            <code>{{ keyword }}</code
-                            >...
+                            <code> {{ keyword }} </code>...
                         </td>
                     </tr>
                 </tbody>
                 <tbody v-else-if="rows().length > 0" class="sticky" ref="tbody">
-                    <tr
+                    <TableRow
                         v-for="(row, i) in rows()"
                         :key="`row-${i}`"
                         :ref="`row${i}`"
-                        @click="handleRowClick(row)"
-                    >
-                        <td
-                            v-if="allowMultipleRowSelection"
-                            :class="{
-                                freeze: freezeColumn === 0,
-                            }"
-                        >
-                            <div class="custom-control custom-checkbox">
-                                <input
-                                    type="checkbox"
-                                    class="custom-control-input"
-                                    :id="`row-${i}-col-select`"
-                                    v-model="row.checked"
-                                    @change="handleRowSelect($event, row, i)"
-                                />
-                                <label
-                                    class="custom-control-label"
-                                    :for="`row-${i}-col-select`"
-                                ></label>
-                            </div>
-                        </td>
-                        <td
-                            v-for="(column, j) in tableColumns"
-                            :key="`row-${i}-col-${j}`"
-                            :style="{
-                                textAlign: isset(column.textAlign)
-                                    ? column.textAlign
-                                    : 'left',
-                            }"
-                            :class="{
-                                'is-divider': getType(column) === 'divider',
-                                freeze: isFroze(column),
-                            }"
-                            :column-key="getKey(column)"
-                        >
-                            <input
-                                type="text"
-                                v-model="row[getKey(column)]"
-                                v-if="getType(column) === 'text'"
-                                readonly="readonly"
-                                @dblclick="handleInputDoubleClick($event, column, row)"
-                                @blur="handleInputBlur($event, column, row)"
-                                @keyup="handleInputKeyup($event, column, row)"
-                                @keydown="
-                                    handleInputKeydown($event, column, row)
-                                "
-                                @change="handleInputChange($event, column, row)"
-                                @input="handleInput($event, column, row)"
-                            />
-                            <!-- <textarea
-                                rows="1"
-                                class="form-control"
-                                v-model="row[getKey(column)]"
-                                v-else-if="getType(column) === 'textarea'"
-                                readonly="readonly"
-                                @dblclick="handleInputDoubleClick($event, column, row)"
-                                @blur="handleInputBlur($event, column, row)"
-                                @keyup="handleInputKeyup($event, column, row)"
-                                @keydown="handleInputKeydown($event, column, row)"
-                                @change="handleInputChange($event, column, row)"
-                                @input="handleInput($event, column, row)"
-                            ></textarea> -->
-                            <input
-                                size="5"
-                                type="number"
-                                v-model.number="row[getKey(column)]"
-                                v-else-if="getType(column) === 'number'"
-                                readonly="readonly"
-                                @dblclick="handleInputDoubleClick($event, column, row)"
-                                @blur="handleInputBlur($event, column, row)"
-                                @keyup="handleInputKeyup($event, column, row)"
-                                @keydown="
-                                    handleInputKeydown($event, column, row)
-                                "
-                                @change="handleInputChange($event, column, row)"
-                                @input="handleInput($event, column, row)"
-                            />
-                            <div
-                                class="custom-control custom-switch"
-                                v-else-if="getType(column) === 'switch'"
-                            >
-                                <input
-                                    type="checkbox"
-                                    class="custom-control-input"
-                                    :value="`${getKey(column)}`"
-                                    v-model="row[getKey(column)]"
-                                    :id="`row-${i}-col-${j}-${getKey(column)}`"
-                                    @change="
-                                        handleInputChange($event, column, row)
-                                    "
-                                />
-                                <label
-                                    class="custom-control-label"
-                                    :for="`row-${i}-col-${j}-${getKey(column)}`"
-                                ></label>
-                            </div>
-                            <div v-else-if="getType(column) === 'options'">
-                                <select
-                                    class="form-control"
-                                    @change="
-                                        handleSelectChange($event, row, column)
-                                    "
-                                    v-if="isset(column.options)"
-                                >
-                                    <option
-                                        v-for="option in column.options"
-                                        :key="`option-${i}-${option.value}`"
-                                        :value="option.value"
-                                        :selected="
-                                            option.value === row[getKey(column)]
-                                        "
-                                    >
-                                        {{ option.text }}
-                                    </option>
-                                </select>
-                            </div>
-                            <div
-                                v-else-if="getType(column) === 'actions'"
-                                class="flex"
-                            >
-                                <component
-                                    v-for="(action, j) in column.actions"
-                                    :key="`action-${row.id}-${j}`"
-                                    :is="action"
-                                    :column="column"
-                                    :row="row"
-                                    :index="i"
-                                ></component>
-                            </div>
-                            <component
-                                v-else-if="getType(column) === 'template'"
-                                :is="column.template"
-                                :column="column"
-                                :row="row"
-                                :value="row[getKey(column)]"
-                                :index="i"
-                            ></component>
-                            <span
-                                class="text-only clickable d-block"
-                                role="button"
-                                v-else-if="getType(column) === 'prompt'"
-                                @click="handleClick($event, column, row)"
-                                >{{
-                                    isset(column.mutate)
-                                        ? column.mutate(
-                                              row[getKey(column)],
-                                              row
-                                          )
-                                        : row[getKey(column)]
-                                }}</span
-                            >
-                            <span
-                                class="text-only"
-                                v-else-if="isSearchable(column)"
-                                v-html="
-                                    $options.filters.highlight(
-                                        isset(column.mutate)
-                                            ? column.mutate(
-                                                  row[getKey(column)],
-                                                  row
-                                              )
-                                            : row[getKey(column)],
-                                        keyword,
-                                        $options._scopeId
-                                    )
-                                "
-                                >{{
-                                    isset(column.mutate)
-                                        ? column.mutate(
-                                              row[getKey(column)],
-                                              row
-                                          )
-                                        : row[getKey(column)]
-                                }}</span
-                            >
-                            <span
-                                class="text-only"
-                                v-else-if="getType(column) !== 'divider'"
-                                >{{
-                                    isset(column.mutate)
-                                        ? column.mutate(
-                                              row[getKey(column)],
-                                              row
-                                          )
-                                        : row[getKey(column)]
-                                }}</span
-                            >
-                        </td>
-                    </tr>
+                        :index="i"
+                        :row="row"
+                        :keyword="keyword"
+                        :columns="columns"
+                        :allowMultipleRowSelection="allowMultipleRowSelection"
+                        :checked="row.checked"
+                        @rowClick="handleRowClick"
+                        @rowCheck="handleRowSelect"
+                        @mounted="handleRowMounted"
+                    ></TableRow>
                 </tbody>
                 <tbody v-else>
                     <tr>
@@ -418,7 +255,6 @@
                     </tr>
                 </tbody>
             </table>
-            
         </div>
         <div class="table-footer">
             <div class="row" v-if="enableDataPagination && !hasPaginateSlot">
@@ -541,7 +377,9 @@
                     </nav>
                 </div>
             </div>
-            <div v-if="hasPaginateSlot" class="row"><slot name="paginate"></slot></div>
+            <div v-if="hasPaginateSlot" class="row">
+                <slot name="paginate"></slot>
+            </div>
         </div>
     </div>
 </template>
@@ -550,14 +388,15 @@
 import mixins from "../lib/mixins.js";
 import filters from "../lib/filters.js";
 import props from "../lib/props.js";
+import TableRow from "./sub/Row";
 // import "font-awesome/css/font-awesome.min.css";
 // import "../assets/scss/table.scss";
 
-if(typeof _ === 'undefined' || _ === null){
+if (typeof _ === "undefined" || _ === null) {
     window._ = require("lodash");
 }
 
-if(typeof moment === 'undefined' || moment === null){
+if (typeof moment === "undefined" || moment === null) {
     window.moment = require("moment");
 }
 
@@ -566,21 +405,24 @@ export default {
     mixins,
     filters,
     props,
+    components: {
+        TableRow,
+    },
     computed: {
         hasBeforeTableSlot() {
-            return !!this.$slots['before-table'];
+            return !!this.$slots["before-table"];
         },
         hasLoadingSlot() {
-            return !!this.$slots['loading'];
+            return !!this.$slots["loading"];
         },
         hasPaginateSlot() {
-            return !!this.$slots['paginate'];
+            return !!this.$slots["paginate"];
         },
         hasSearchSlot() {
-            return !!this.$slots['search'];
+            return !!this.$slots["search"];
         },
         hasFilterSlot() {
-            return !!this.$slots['filter'];
+            return !!this.$slots["filter"];
         },
         maxPages() {
             var pages = [];
@@ -644,7 +486,6 @@ export default {
                 this.totalTableRows > 0
                     ? this.totalTableRows
                     : this.data.length,
-            oldInputValue: null,
             isSearching: false,
             searchedKeywordModel: this.searchedKeyword,
         };
@@ -670,18 +511,21 @@ export default {
         if (this.isset(this.sortedColumn)) {
             this.currentColumn = this.sortedColumn;
         }
-        this.$emit('mounted', this);
+        this.$emit("mounted", this);
     },
     updated() {
         this.updateComponents();
     },
     methods: {
+        handleRowMounted(row, index) {
+            this.$emit("rowMounted", row, index);
+        },
         setLoading(loading = true) {
             this.loading = loading;
         },
-        handleRowClick: _.debounce(function(row) {
-            this.$emit('rowClick', row);
-        }),
+        handleRowClick(row, index) {
+            this.$emit("rowClick", row, index);
+        },
         updateComponents() {
             if (this.$refs.thead) {
                 this.$refs.thead.childNodes.forEach((child) => {
@@ -714,7 +558,7 @@ export default {
             }
         },
         isFroze(column) {
-            if(column.disableFreezing){
+            if (column.disableFreezing) {
                 return false;
             }
             return this.isset(column.freeze) && column.freeze
@@ -725,42 +569,13 @@ export default {
             column.freeze = !column.freeze;
             this.$forceUpdate();
         },
-        handleClick(e, column = {}, row) {
-            if (
-                !this.isString(column) &&
-                {}.hasOwnProperty.call(column, "message") &&
-                {}.hasOwnProperty.call(column, "confirmed")
-            ) {
-                const oldValue = row[this.getKey(column)];
-
-                var value = prompt(
-                    column.message,
-                    this.isset(row[this.getKey(column)])
-                        ? row[this.getKey(column)]
-                        : ""
-                );
-
-                if (this.isset(value)) {
-                    row[this.getKey(column)] = value;
-                    column.confirmed(value, row, oldValue);
-                }
-            }
-        },
         handleSearchClick() {
             this.$refs.searchForm.submit();
-        },
-        handleSelectChange(e, row, column) {
-            if (
-                !this.isString(column) &&
-                {}.hasOwnProperty.call(column, "change")
-            ) {
-                column.change(e, row, column);
-            }
         },
         handlePaginationClick(e, page) {
             var currentPage = page;
 
-            if(this.isset(this.$listeners.paginationClick)){
+            if (this.isset(this.$listeners.paginationClick)) {
                 currentPage = this.$emit(
                     "paginationClick",
                     e,
@@ -795,7 +610,7 @@ export default {
         handleSearchTyping: _.debounce(function (e) {
             var keyword = e.target.value;
 
-            if(this.isset(this.$listeners.onSearchInput)){
+            if (this.isset(this.$listeners.onSearchInput)) {
                 keyword = this.$emit("onSearchInput", e, this);
             }
 
@@ -810,74 +625,20 @@ export default {
             }
             this.currentPage = 1;
         }, 500),
-        handleInputChange(e, column, row) {
-            if (
-                !this.isString(column) &&
-                {}.hasOwnProperty.call(column, "change") &&
-                e.target.readOnly === false
-            ) {
-                column.change(e, row, column);
-            }
-        },
-        handleInputKeydown: _.debounce(async function (e, column, row) {
-            if (
-                !this.isString(column) &&
-                {}.hasOwnProperty.call(column, "keydown") &&
-                e.target.readOnly === false &&
-                e.location === 0
-            ) {
-                await column.keydown(e, row, column);
-            }
-        }, 500),
-        handleInputKeyup: _.debounce(async function (e, column, row) {
-            if (
-                !this.isString(column) &&
-                {}.hasOwnProperty.call(column, "keyup") &&
-                e.target.readOnly === false &&
-                e.location === 0
-            ) {
-                await column.keyup(e, row, column);
-            }
-        }, 500),
-        handleInput: _.debounce(async function (e, column, row) {
-            if (
-                !this.isString(column) &&
-                {}.hasOwnProperty.call(column, "input") &&
-                e.target.readOnly === false
-            ) {
-                await column.input(e, row, column);
-            }
-        }, 500),
-        async handleInputBlur(e, column, row) {
-            e.target.readOnly = true;
-
-            if (
-                !this.isString(column) &&
-                {}.hasOwnProperty.call(column, "blur") &&
-                e.target.readOnly === false
-            ) {
-                await column.blur(e, row, column);
-            }
-        },
-        async handleInputDoubleClick(e, column, row) {
-            this.oldInputValue = e.target.value;
-            e.target.readOnly = false;
-
-            if (
-                !this.isString(column) &&
-                {}.hasOwnProperty.call(column, "doubleClick") &&
-                e.target.readOnly === false
-            ) {
-                await column.doubleClick(e, row, column);
-            }
-        },
         handleRowSelect(e, row, index) {
             if (!e.target.checked) {
                 this.checkAll = false;
             }
-            this.$emit("onRowSelect", e.target.checked, row, index, this.data.filter(row => {
-                return row.checked;
-            }), e);
+            this.$emit(
+                "onRowSelect",
+                e.target.checked,
+                row,
+                index,
+                this.data.filter((row) => {
+                    return row.checked;
+                }),
+                e
+            );
         },
         handleCheckAll(e) {
             this.checkAll = e.target.checked;
@@ -905,11 +666,11 @@ export default {
         rows() {
             var data = this.data;
 
-            if(this.enableDataFilter){
-                data = this.filterData(data); 
+            if (this.enableDataFilter) {
+                data = this.filterData(data);
             }
 
-            if(this.enableDataSorting){
+            if (this.enableDataSorting) {
                 var sortKey = this.currentColumn;
 
                 // used when you are mutating
@@ -927,14 +688,14 @@ export default {
 
                 data = this.sortData(data, sortKey);
             }
-            
-            if(this.enableDataPagination){
+
+            if (this.enableDataPagination) {
                 data = this.paginate(data);
             }
 
             return data;
         },
-        paginate(data){
+        paginate(data) {
             var start = (this.currentPage - 1) * this.limit;
             var end = start + this.limit;
 
@@ -956,11 +717,11 @@ export default {
             }
         },
         sortData(data, sortKey) {
-            if(this.isset(this.$listeners.overrideSort)){
+            if (this.isset(this.$listeners.overrideSort)) {
                 data.sort((a, b) => {
-                    return this.$emit('overrideSort', a, b, sortKey);
+                    return this.$emit("overrideSort", a, b, sortKey);
                 });
-            }else{
+            } else {
                 // // sort rows by column
                 data.sort((a, b) => {
                     if (
@@ -973,27 +734,38 @@ export default {
                         if (moment(a[sortKey]) - moment(b[sortKey]) < 0) {
                             return this.asc ? 1 : -1;
                         }
-                    }else{
-                        if (!isNaN(a[sortKey]) && !isNaN(b[sortKey])) { // is both a and b a number.
-                            if (parseFloat(a[sortKey]) < parseFloat(b[sortKey])) {
+                    } else {
+                        if (!isNaN(a[sortKey]) && !isNaN(b[sortKey])) {
+                            // is both a and b a number.
+                            if (
+                                parseFloat(a[sortKey]) < parseFloat(b[sortKey])
+                            ) {
                                 return this.asc ? -1 : 1;
                             }
-                            if (parseFloat(a[sortKey]) > parseFloat(b[sortKey])) {
+                            if (
+                                parseFloat(a[sortKey]) > parseFloat(b[sortKey])
+                            ) {
                                 return this.asc ? 1 : -1;
                             }
                         } else {
-                            if (a[sortKey].toLowerCase() < b[sortKey].toLowerCase()) {
+                            if (
+                                a[sortKey].toLowerCase() <
+                                b[sortKey].toLowerCase()
+                            ) {
                                 return this.asc ? -1 : 1;
                             }
-                            if (a[sortKey].toLowerCase() > b[sortKey].toLowerCase()) {
+                            if (
+                                a[sortKey].toLowerCase() >
+                                b[sortKey].toLowerCase()
+                            ) {
                                 return this.asc ? 1 : -1;
                             }
                         }
 
-                        if(a[sortKey].length < b[sortKey].length){
+                        if (a[sortKey].length < b[sortKey].length) {
                             return this.asc ? -1 : 1;
                         }
-                        if(a[sortKey].length > b[sortKey].length){
+                        if (a[sortKey].length > b[sortKey].length) {
                             return this.asc ? 1 : -1;
                         }
                     }
@@ -1010,8 +782,16 @@ export default {
                     var found = false;
                     // get searchable columns
                     for (let i = 0; i < this.columns.length; i++) {
-                        if (this.isSearchable(this.columns[i]) && this.isString(this.keyword)) {
-                            if (this.search(row[this.columns[i].key], this.keyword)) {
+                        if (
+                            this.isSearchable(this.columns[i]) &&
+                            this.isString(this.keyword)
+                        ) {
+                            if (
+                                this.search(
+                                    row[this.columns[i].key],
+                                    this.keyword
+                                )
+                            ) {
                                 found = true;
                             }
                         }
@@ -1026,44 +806,44 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.custom-switch{
+.custom-switch {
     padding: 0;
     width: 1.75rem;
     display: inline-block;
     min-height: 1rem;
     height: 1rem;
-    .custom-control-input{
+    .custom-control-input {
         width: 100%;
         z-index: 1;
         height: 1rem;
-        &:checked{
-            & ~.custom-control-label{
-                &:after{
+        &:checked {
+            & ~ .custom-control-label {
+                &:after {
                     transform: translate(100%, -50%);
                 }
             }
         }
     }
-    .custom-control-label{
+    .custom-control-label {
         height: 1rem;
-        &:before{
+        &:before {
             top: 0;
             left: 0;
             position: relative;
         }
-        &:after{
+        &:after {
             left: 2px;
             top: 50%;
             transform: translate(0, -50%);
         }
     }
 }
-.table-loading{
+.table-loading {
     min-height: 300px;
     display: flex;
     width: 100%;
     align-items: center;
-    > div{
+    > div {
         width: 100%;
     }
 }

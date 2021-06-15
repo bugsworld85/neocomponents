@@ -72,13 +72,36 @@ export default {
                     title: "SKU",
                     searchable: true,
                     sortable: true,
-                    freeze: true
+                    freeze: true, // freezed initially
+                    type: 'template',
+                    template: Vue.components("your-component", {
+                        template: `<span>${row.sku}</span>`,
+                        props: ["row", "column", "index"],
+                    }),
+                    // ---- OR ----
+                    // template: YourComponent
                 },
                 {
                     key: "name",
                     title: "Name",
                     searchable: true,
-                    sortable: true
+                    sortable: true,
+                    type: 'text' // double click to edit
+                    // available events
+                    change(e, row, column) {},
+                    keydown(e, row, column) {},
+                    keyup(e, row, column) {},
+                    input(e, row, column) {},
+                    blur(e, row, column) {},
+                    doubleClick(e, row, column) {},
+                },
+                {
+                    key: "qty",
+                    title: "Quantity",
+                    searchable: true,
+                    sortable: true,
+                    type: 'number' // double click to edit
+                    disableFreezing: true // do not show freeze button in this column
                 },
                 {
                     key: "created_at",
@@ -146,6 +169,7 @@ Event | Accepts | Description
 `@overrideSort` | `a, b, sortColumnKey` | Overrides how data is being sort. Must return `1`, `-1`, `0`.
 `@rowClick` | `row` | Listen to row click.
 `@mounted` | `NeoTable` | Hook when NeoTable is mounted.
+`@rowMounted` | `row` | Hook when table row is mounted.
 
 #### Column Properties
 Property | Type | Default | Required | Description

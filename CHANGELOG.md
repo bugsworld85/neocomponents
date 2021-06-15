@@ -1,3 +1,8 @@
+#### 0.2.0 (2021-06-16)
+- moved table row into actual row component
+- couple of minor fixes
+- added row mounted event.
+
 #### 0.1.17 (2021-05-22)
 - Removed freeze indicator when freeze is triggered.
 

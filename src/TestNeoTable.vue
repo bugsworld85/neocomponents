@@ -9,15 +9,17 @@
             sortedColumn="name"
             :searchedKeyword="`peter`"
             ref="neoTable"
+            :allowMultipleRowSelection="true"
+            @onRowSelect="handleRowSelect"
+            @onCheckAll="handleCheckAll"
+            @rowMounted="handleRowMounted"
         >
             <template v-slot:search>test search</template>
             <template v-slot:filter>test filter</template>
             <template v-slot:before-table>before table</template>
             <template v-slot:paginate>test paginate</template>
             <template v-slot:loading>
-                <div>
-                    testing
-                </div>
+                <div>testing</div>
             </template>
         </neo-table>
         <neo-window
@@ -53,12 +55,12 @@ import "./assets/scss/neocomponents.scss";
 export default {
     name: "TestNeoTable",
     props: {
-        msg: String
+        msg: String,
     },
     components: {
         NeoTable,
         NeoWindow,
-        NeoPaginator
+        NeoPaginator,
     },
     data() {
         return {
@@ -77,37 +79,41 @@ export default {
                     title: "SKU",
                     searchable: true,
                     sortable: true,
-                    freeze: true
+                    freeze: true,
                 },
                 {
                     key: "your_sku",
                     title: "Your SKU",
                     searchable: true,
-                    sortable: true
+                    sortable: true,
+                    type: "text",
+                    input(e) {
+                        console.log(e.target.value);
+                    },
                 },
                 {
                     key: "name",
                     title: "Name",
                     searchable: true,
                     sortable: true,
-                    freeze: true
+                    freeze: true,
                 },
                 {
                     key: "active",
                     title: "Active",
                     sortable: true,
-                    type: 'switch',
-                    textAlign: 'center',
+                    type: "switch",
+                    textAlign: "center",
                     change: (e) => {
                         console.log(e.target.checked);
-                    }
+                    },
                 },
                 {
                     key: "brand_name",
                     title: "Brand",
                     searchable: true,
                     sortable: true,
-                    freeze: true
+                    freeze: true,
                 },
                 {
                     key: "barcode",
@@ -118,22 +124,27 @@ export default {
                 {
                     key: "case_size",
                     title: "Case Size",
-                    sortable: true
+                    sortable: true,
+                    type: "prompt",
+                    message: "Please enter value",
+                    confirmed(value) {
+                        console.log(value);
+                    },
                 },
                 {
                     key: "cases_per_layer",
                     title: "Cases / Layer",
-                    sortable: true
+                    sortable: true,
                 },
                 {
                     key: "status",
                     title: "Status",
-                    sortable: true
+                    sortable: true,
                 },
                 {
                     key: "updated_at",
                     title: "Updated At",
-                    sortable: true
+                    sortable: true,
                 },
                 {
                     key: "actions",
@@ -147,18 +158,18 @@ export default {
                             computed: {
                                 link() {
                                     return "";
-                                }
+                                },
                             },
                             methods: {
                                 testClick() {
                                     console.log(this.column);
                                     console.log(this.row);
-                                }
-                            }
-                        })
-                    ]
-                }
-            ]
+                                },
+                            },
+                        }),
+                    ],
+                },
+            ],
         };
     },
     mounted() {
@@ -166,8 +177,18 @@ export default {
         // this.$refs.neoTable.setLoading(true);
     },
     methods: {
-        handleWindowClose() {}
-    }
+        handleRowMounted(row) {
+            console.log(row);
+        },
+        handleCheckAll(isChecked, data, e) {
+            console.log(data);
+        },
+        handleRowSelect(check, row, index, checkedRows) {
+            console.log(check, row);
+            console.log(checkedRows);
+        },
+        handleWindowClose() {},
+    },
 };
 </script>
 
