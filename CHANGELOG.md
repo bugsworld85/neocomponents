@@ -1,3 +1,6 @@
+#### 0.2.1 (2021-06-16)
+- fixed mobile responsiveness of paginator
+
 #### 0.2.0 (2021-06-16)
 - moved table row into actual row component
 - couple of minor fixes

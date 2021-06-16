@@ -1,10 +1,14 @@
 <template>
-    <div class="neo-paginator flex">
+    <div class="neo-paginator">
         <span
             class="paginator-info"
             v-if="typeof total !== 'undefined' && total > 0"
         >
-            {{ `${from}-${to > total ? total : to} of ${numberFormat(total)} ${title}` }}
+            {{
+                `${from}-${to > total ? total : to} of ${numberFormat(
+                    total
+                )} ${title}`
+            }}
         </span>
         <div>
             <ul class="nostyle horizontal paginator" v-if="total > per_page">
@@ -159,10 +163,22 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.flex{
+.flex {
     display: flex;
 }
-.neo-paginator{
+.neo-paginator {
     width: 100%;
+}
+@media only screen and (max-width: 512px) {
+    .neo-paginator {
+        display: block;
+        text-align: center;
+        .paginator-info {
+            width: auto;
+        }
+        > div {
+            display: inline-block;
+        }
+    }
 }
 </style>

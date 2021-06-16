@@ -66,9 +66,9 @@ export default {
         return {
             meta: {
                 current_page: 1,
-                last_page: 1,
+                last_page: 40,
                 per_page: 15,
-                total: 25,
+                total: 600,
                 to: 15,
                 from: 1,
             },
