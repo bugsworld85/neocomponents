@@ -96,118 +96,17 @@
             :style="{ maxHeight: maxHeight !== null ? maxHeight : 'initial' }"
         >
             <table class="table" ref="table">
-                <thead
+                <TableHead
                     v-if="tableColumns.length > 0"
-                    class="sticky"
-                    ref="thead"
-                >
-                    <tr>
-                        <th
-                            v-if="allowMultipleRowSelection"
-                            width="10"
-                            class="checkboxes"
-                            :class="{
-                                freeze: freezeColumn === 0,
-                            }"
-                        >
-                            <div class="custom-control custom-checkbox">
-                                <input
-                                    type="checkbox"
-                                    class="custom-control-input"
-                                    id="select-all"
-                                    v-model="checkAll"
-                                    @change="handleCheckAll"
-                                />
-                                <label
-                                    class="custom-control-label"
-                                    for="select-all"
-                                ></label>
-                            </div>
-                        </th>
-                        <th
-                            v-for="(column, i) in tableColumns"
-                            :key="`thead-col-${i}`"
-                            :width="getWidth(column)"
-                            :style="{
-                                textAlign: isset(column.textAlign)
-                                    ? column.textAlign
-                                    : 'left',
-                            }"
-                            :class="{
-                                'is-divider': getType(column) === 'divider',
-                                freeze: isFroze(column),
-                                'active-column':
-                                    currentColumn === getKey(column),
-                            }"
-                            :column-key="getKey(column)"
-                        >
-                            <button
-                                @click="handleColumnSort(getKey(column))"
-                                v-if="isSortable(column)"
-                                type="button"
-                            >
-                                <span v-html="getTitle(column)">{{
-                                    getTitle(column)
-                                }}</span>
-                                <i
-                                    class="fa fa-sort-up text-primary"
-                                    v-if="
-                                        isAscending(column, currentColumn, asc)
-                                    "
-                                ></i>
-                                <i
-                                    class="fa fa-sort-down text-primary"
-                                    v-else-if="
-                                        isAscending(column, currentColumn, !asc)
-                                    "
-                                ></i>
-                                <i class="fa fa-sort" v-else></i>
-                            </button>
-                            <span v-else-if="getType(column) !== 'divider'">
-                                <span v-html="getTitle(column)">{{
-                                    getTitle(column)
-                                }}</span>
-                            </span>
-                            <span
-                                v-if="
-                                    getType(column) !== 'divider' &&
-                                    getType(column) !== 'actions'
-                                "
-                                class="column-options"
-                            >
-                                <button
-                                    type="button"
-                                    class="btn btn-sm"
-                                    v-if="
-                                        !isset(column.disableFreezing) ||
-                                        (isset(column.disableFreezing) &&
-                                            column.disableFreezing === false)
-                                    "
-                                    :class="{
-                                        'btn-light':
-                                            isset(column.freeze) &&
-                                            column.freeze === false
-                                                ? true
-                                                : !(
-                                                      isset(column.freeze) &&
-                                                      column.freeze
-                                                  ),
-                                        'btn-primary':
-                                            isset(column.freeze) &&
-                                            column.freeze === true,
-                                        'is-freeze': isFroze(column),
-                                    }"
-                                    @click="handleFreezeSelect(column, i)"
-                                    title="Freeze Column"
-                                >
-                                    <i
-                                        class="fa fa-snowflake-o fa-snowflake"
-                                    ></i>
-                                </button>
-                            </span>
-                        </th>
-                    </tr>
-                </thead>
+                    :allowMultipleRowSelection="allowMultipleRowSelection"
+                    v-model="checkAll"
+                    :currentColumn="currentColumn"
+                    :asc="asc"
+                    :columns="tableColumns"
+                    @freeze="handleFreeze"
+                    @checked="handleCheckAll"
+                    @click="handleColumnSort"
+                ></TableHead>
                 <tbody v-if="loading || searching">
                     <tr>
                         <td
@@ -388,7 +287,8 @@
 import mixins from "../lib/mixins.js";
 import filters from "../lib/filters.js";
 import props from "../lib/props.js";
-import TableRow from "./sub/Row";
+import TableRow from "./sub/TableRow";
+import TableHead from "./sub/TableHead";
 // import "font-awesome/css/font-awesome.min.css";
 // import "../assets/scss/table.scss";
 
@@ -407,6 +307,7 @@ export default {
     props,
     components: {
         TableRow,
+        TableHead,
     },
     computed: {
         hasBeforeTableSlot() {
@@ -527,21 +428,21 @@ export default {
             this.$emit("rowClick", row, index);
         },
         updateComponents() {
-            if (this.$refs.thead) {
-                this.$refs.thead.childNodes.forEach((child) => {
-                    var offsetLeft = 0;
+            // if (this.$refs.thead) {
+            //     this.$refs.thead.childNodes.forEach((child) => {
+            //         var offsetLeft = 0;
 
-                    child.querySelectorAll("th, td").forEach((element, i) => {
-                        if (element.classList.contains("freeze")) {
-                            element.style.left = `${offsetLeft}px`;
+            //         child.querySelectorAll("th, td").forEach((element, i) => {
+            //             if (element.classList.contains("freeze")) {
+            //                 element.style.left = `${offsetLeft}px`;
 
-                            offsetLeft += element.offsetWidth;
-                        } else {
-                            element.style.left = "initial";
-                        }
-                    });
-                });
-            }
+            //                 offsetLeft += element.offsetWidth;
+            //             } else {
+            //                 element.style.left = "initial";
+            //             }
+            //         });
+            //     });
+            // }
 
             if (this.isset(this.$refs.tbody)) {
                 this.$refs.tbody.childNodes.forEach((child) => {
@@ -565,7 +466,7 @@ export default {
                 ? column.freeze
                 : false;
         },
-        handleFreezeSelect(column, colIndex) {
+        handleFreeze(column, colIndex) {
             column.freeze = !column.freeze;
             this.$forceUpdate();
         },

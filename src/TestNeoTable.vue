@@ -10,6 +10,7 @@
             :searchedKeyword="`peter`"
             ref="neoTable"
             :allowMultipleRowSelection="true"
+            @sortClick="handleSortClick"
             @onRowSelect="handleRowSelect"
             @onCheckAll="handleCheckAll"
             @rowMounted="handleRowMounted"
@@ -177,8 +178,11 @@ export default {
         // this.$refs.neoTable.setLoading(true);
     },
     methods: {
+        handleSortClick(key, isAsc) {
+            console.log(key, isAsc);
+        },
         handleRowMounted(row) {
-            console.log(row);
+            // console.log(row);
         },
         handleCheckAll(isChecked, data, e) {
             console.log(data);

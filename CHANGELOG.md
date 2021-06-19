@@ -1,3 +1,7 @@
+#### 0.2.2 (2021-06-19)
+- moved table head into its own component.
+
+
 #### 0.2.1 (2021-06-16)
 - fixed mobile responsiveness of paginator
 
