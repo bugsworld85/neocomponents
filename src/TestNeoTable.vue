@@ -22,6 +22,25 @@
             <template v-slot:loading>
                 <div>testing</div>
             </template>
+            <template v-slot:empty>
+                <div>testing</div>
+            </template>
+            <template
+                v-slot:table-row="{
+                    row,
+                    index,
+                    allowMultipleRowSelection,
+                    checked,
+                }"
+            >
+                <tr>
+                    <td>{{ row.id }}</td>
+                    <td>{{ index }}</td>
+                    <td>{{ checked }}</td>
+                    <td>{{ allowMultipleRowSelection }}</td>
+                    <td>test</td>
+                </tr>
+            </template>
         </neo-table>
         <neo-window
             title="Edit Notes"
@@ -97,7 +116,28 @@ export default {
                     title: "Name",
                     searchable: true,
                     sortable: true,
-                    freeze: true,
+                    // freeze: true,
+                },
+                {
+                    key: "depots",
+                    title: "Depots",
+                    type: "columns", // disallow freezing on type columns
+                    columns: [
+                        {
+                            key: "depot-1",
+                            title: "Depot 1",
+                            sortable: true,
+                        },
+                        {
+                            key: "depot-2",
+                            title: "Depot 2",
+                            type: "template",
+                            template: Vue.component("testing", {
+                                template: `<span>{{ row.qty }}</span>`,
+                                props: ["column", "row"],
+                            }),
+                        },
+                    ],
                 },
                 {
                     key: "active",
@@ -114,7 +154,7 @@ export default {
                     title: "Brand",
                     searchable: true,
                     sortable: true,
-                    freeze: true,
+                    // freeze: true,
                 },
                 {
                     key: "barcode",

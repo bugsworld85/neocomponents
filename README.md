@@ -10,7 +10,6 @@ Pre built VueJS components to make developer's life easier.
 
 
 Upcoming components:
-  - NeoSwitch - checkbox in a form of a switch.
   - NeoFloater - an element that is draggable across the screen.
 
 ### Pre-Requisite
@@ -41,9 +40,12 @@ $ npm install --save @bugsworld85/neocomponents
 ```
 Include into your component.
 ```javascript
-import { NeoTable, NeoWindow, NeoPaginator } from "neomart"
+import { NeoTable, NeoWindow, NeoPaginator } from "@bugsworld85/neocomponents"
 ```
-
+### Component Testing
+```sh
+$ npm run serve
+```
 
 # Components
 ## NeoTable
@@ -55,9 +57,13 @@ Dynamic table component
 ></neo-table>
 ```
 ```javascript
+import { NeoTable } from "@bugsworld85/neocomponents";
 import moment from "moment";
 
 export default {
+    components: {
+        NeoTable
+    },
     data() {
         return {
             data: [], // array of object data
@@ -133,6 +139,7 @@ export default {
     }
 }
 ```
+
 #### Component Properties
 
 Name | Type | Default | Description
@@ -160,13 +167,9 @@ Name | Type | Default | Description
 #### Component Events
 Event | Accepts | Description
 ------- | ---------------- | ---------
-`@onSearchInput` |  `event, NeoTable` | Listen to search input typing.
-`@onClearSearch` |  | Triggered when you clear search.
-`@paginationClick` | `event, pageNumber, { keyword, sortedColumn, asc }, NeoTable` | Triggered when you click on pagination buttons. Must return new page value.
-`@onRowSelect` | `isChecked, row, index, data, event` | Fired when you selected a row via checkbox. Only when `multipleRows` is `true`. `data` contains all checked items.
-`@onCheckAll` | `isChecked, data, event` | Fired when you check column header checkbox. Only when `multipleRows` is `true`.
+`@onRowSelect` | `isChecked, row, index, data, event` | Fired when you selected a row via checkbox. Only when `allowMultipleRowSelection` is `true`. `data` contains all checked items.
+`@onCheckAll` | `isChecked, data, event` | Fired when you check column header checkbox. Only when `allowMultipleRowSelection` is `true`.
 `@sortClick` | `sortColumnKey, isAsc` | Fired when you click on column header title.
-`@overrideSort` | `a, b, sortColumnKey` | Overrides how data is being sort. Must return `1`, `-1`, `0`.
 `@rowClick` | `row` | Listen to row click.
 `@mounted` | `NeoTable` | Hook when NeoTable is mounted.
 `@rowMounted` | `row` | Hook when table row is mounted.
@@ -174,32 +177,52 @@ Event | Accepts | Description
 #### Column Properties
 Property | Type | Default | Required | Description
 ------- | ---------------- | ----------|- | ---------
-`key` |  `String` | `null` | yes | Define column properties, cell value mutation or event callbacks.
-`title` |  `String` | `null` | yes | Title of the column.
+`key` |  `String` | `null` | yes | Serves as the column identifier and can be any property of an object from the data and will render the value of that property instantly. But you can use any column identifier and use along side `mutate`.
+`title` |  `String` | `null` | no | Title of the column. Can be empty string.
 `searchable` |  `Boolean` | `false` | no | Includes the column from data searching.
 `sortable` |  `Boolean` | `false` | no | Determines if the column is sortable.
 `freeze` |  `Boolean` | `false` | no | Determines whether to freeze the column initially.
 `textAlign` |  `String` | `left` | no | `left`, `center`, `right`
 `width` |  `Integer` | `null` | no | Width of the column.
-`mutate` |  `Function` | `null` | no | Callback function to mutate or alter column data value. Accepts 2 parameters which is the cell value and the `row` data.
 `message` |  `String` | `null` | no | Message to display when column `prompt` type has been triggered.
-`confirm` |  `Function` | `null` | no | Callback function after confirming the `prompt` input.
-`type` |  `String` | `"string"` | no | `string`, `text`, `number`, `switch`, `checkbox`, `actions`, `template`, `options`, `prompt`, `divider`. Definition of each type is described below.
-`disableFreezing` |  `Boolean` | `"false"` | no | Hide's the freeze button from the table header.
+`type` |  `String` | `"string"` | no | `string`, `text`, `number`, `switch`, `checkbox`, `actions`, `template`, `options`, `prompt`, `divider`, `columns`. Definition of each type is described below.
+`disableFreezing` |  `Boolean` | `false` | no | Hide's the freeze button from the table header.
+`options` |  `Array` | `[]` | no | Options for `select` column type. Accepts `Array` of `{ value: text }` object.
+
+#### Column Methods
+Property | Type | Default | Accepts  | Required | Description
+------- | ---------------- | ------- | ---------- | - | ---------
+`mutate` |  `Function` | `null` | `value`, `row` | no | Callback function to mutate or alter column data value. Accepts 2 parameters which is the cell value and the `row` data. Must return desired output.
+`confirm` |  `Function` | `null` | `value` | no | Callback function after confirming the `prompt` input.
+
+#### Column Available Events (`text` and `number` column types only)
+Property | Type | Accepts  | Description
+------- | ---------------- | ---------- | ---------
+`change` |  `Function` | `e`, `value`, `row` | `change` event of a `text`, `number`, `checkbox`, `select` input elements.
+`keydown` |  `Function` | `e`, `value`, `row` | `keydown` event of a `text`, `number` input elements.
+`keyup` |  `Function` | `e`, `value`, `row` | `keyup` event of a `text`, `number` input elements.
+`input` |  `Function` | `e`, `value`, `row` | `input` event of a `text`, `number` input elements.
+`blur` |  `Function` | `e`, `value`, `row` | `blur` event of a `text`, `number` input elements.
+`doubleClick` |  `Function` | `e`, `value`, `row` | `doubleClick` event of a `text`, `number` input elements.
 
 #### Column Types
 Type | Description
 ------- | ---------
-`string` | Regular string.
-`text` | Input of type `text`.
-`number` | Input of type `number`.
-`switch` | Checkbox displayed as a switch.
-`checkbox` | Input of type `checkbox`.
-`actions` | Array of `Vue` components. Can be buttons.
-`template` | A single `Vue` component. Can be anything you want to display within the column.
-`options` | `select` dropdown options. Accepts `Array` of `{ text, value }` objects.
-`prompt` | Opens browser input prompt.
-`divider` | A simple divider column.
+`string` | Regular string. No events attached.
+`text` | Input of type `text`. Double click to edit.
+`number` | Input of type `number`. Double click to edit.
+`switch` | Checkbox displayed as a switch. Capture input value via `change` column method.
+`checkbox` | Input of type `checkbox`. Capture input value via `change` column method.
+`select` | `select` dropdown options. `options` property is required when using this type.
+`prompt` | Opens browser input prompt. Capture input value via `confirm` column method.
+`actions` | Array of `Vue` components and can be anything you want.
+`template` | A single `Vue` component. Can be anything you want to display within the column and handle column cell events independently from `NeoTable`.
+`divider` | A simple column divider. Does not require `key` column property.
+
+##### Coming Soon!
+Type | Description
+------- | ---------
+`columns` | Sub columns. Array of columns. `key` and `title` properties are required. `key` should match object property from your data array.
 
 #### Slots
 Name | Description
@@ -208,15 +231,15 @@ Name | Description
 `filter` | Add additional components right next to table search field.
 `before-table` | Add additional components before table.
 `paginate` | Replaces the pagination data in the footer.
+`loading` | Replaces the loading section.
+`empty` | Displays when table is empty.
+`table-head` | Replace the table header (`thead`) with your your custom component.
+`table-row` | Replace the table row (`tr`) with your your custom component.
 
 ### Todos
-
  - Write documentation on NeoWindow
  - Write documentation on NeoPaginator
- - Create and write NeoSwitch component and documentation
  - Include `textarea` in column types.
- - Add lazy loading capabilities.
- - Add slots to NeoTable.
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.

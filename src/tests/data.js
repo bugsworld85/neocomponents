@@ -43,7 +43,19 @@ module.exports = [
         created_at: "2021-01-29T05:14:33.000000Z",
         supplier_name: "Casella Family Brands",
         brand_name: "Test spirit brand 4",
-        vintage: null, active: true
+        vintage: null, active: true,
+        depots: [
+            {
+                id: 1,
+                name: 'test',
+                qty: 0,
+            },
+            {
+                id: 2,
+                name: 'test-2',
+                qty: 2
+            }
+        ],
     }, {
         id: 2178,
         supplier_id: 23,
@@ -88,7 +100,19 @@ module.exports = [
         created_at: "2021-01-29T04:51:31.000000Z",
         supplier_name: "Casella Family Brands",
         brand_name: "Test spirit brand",
-        vintage: null, active: true
+        vintage: null, active: true,
+        depots: [
+            {
+                id: 1,
+                name: 'test',
+                qty: 0,
+            },
+            {
+                id: 2,
+                name: 'test-2',
+                qty: 2
+            }
+        ],
     }, {
         id: 2180,
         supplier_id: 23,
@@ -133,7 +157,19 @@ module.exports = [
         created_at: "2021-01-29T05:08:43.000000Z",
         supplier_name: "Casella Family Brands",
         brand_name: "test spirit 2",
-        vintage: null, active: true
+        vintage: null, active: true,
+        depots: [
+            {
+                id: 1,
+                name: 'test',
+                qty: 0,
+            },
+            {
+                id: 2,
+                name: 'test-2',
+                qty: 2
+            }
+        ],
     }, {
         id: 2179,
         supplier_id: 23,
@@ -178,7 +214,19 @@ module.exports = [
         created_at: "2021-01-29T05:08:23.000000Z",
         supplier_name: "Casella Family Brands",
         brand_name: "test spirit 2",
-        vintage: null, active: true
+        vintage: null, active: true,
+        depots: [
+            {
+                id: 1,
+                name: 'test',
+                qty: 0,
+            },
+            {
+                id: 2,
+                name: 'test-2',
+                qty: 2
+            }
+        ],
     }, {
         id: 2177,
         supplier_id: 23,
@@ -223,7 +271,19 @@ module.exports = [
         created_at: "2021-01-29T04:46:03.000000Z",
         supplier_name: "Casella Family Brands",
         brand_name: "Test brand name 5",
-        vintage: null, active: true
+        vintage: null, active: true,
+        depots: [
+            {
+                id: 1,
+                name: 'test',
+                qty: 0,
+            },
+            {
+                id: 2,
+                name: 'test-2',
+                qty: 2
+            }
+        ],
     }, {
         id: 2182,
         supplier_id: 23,
@@ -268,7 +328,19 @@ module.exports = [
         created_at: "2021-01-29T05:30:58.000000Z",
         supplier_name: "Casella Family Brands",
         brand_name: "Spirit brand name",
-        vintage: null, active: true
+        vintage: null, active: true,
+        depots: [
+            {
+                id: 1,
+                name: 'test',
+                qty: 0,
+            },
+            {
+                id: 2,
+                name: 'test-2',
+                qty: 2
+            }
+        ],
     }, {
         id: 307,
         supplier_id: 23,
@@ -313,7 +385,19 @@ module.exports = [
         created_at: "2019-11-15T06:49:59.000000Z",
         supplier_name: "Casella Family Brands",
         brand_name: "Peter Lehmann",
-        vintage: "2016", active: true
+        vintage: "2016", active: true,
+        depots: [
+            {
+                id: 1,
+                name: 'test',
+                qty: 0,
+            },
+            {
+                id: 2,
+                name: 'test-2',
+                qty: 2
+            }
+        ],
     }, {
         id: 970,
         supplier_id: 23,
@@ -358,7 +442,19 @@ module.exports = [
         created_at: "2020-07-08T04:07:37.000000Z",
         supplier_name: "Casella Family Brands",
         brand_name: "Peter Lehmann",
-        vintage: "2017", active: true
+        vintage: "2017", active: true,
+        depots: [
+            {
+                id: 1,
+                name: 'test',
+                qty: 0,
+            },
+            {
+                id: 2,
+                name: 'test-2',
+                qty: 2
+            }
+        ],
     }, {
         id: 942,
         supplier_id: 23,
@@ -403,7 +499,19 @@ module.exports = [
         created_at: "2020-07-01T04:34:39.000000Z",
         supplier_name: "Casella Family Brands",
         brand_name: "Peter Lehmann",
-        vintage: "2018", active: true
+        vintage: "2018", active: true,
+        depots: [
+            {
+                id: 1,
+                name: 'test',
+                qty: 0,
+            },
+            {
+                id: 2,
+                name: 'test-2',
+                qty: 2
+            }
+        ],
     }, {
         id: 338,
         supplier_id: 23,
@@ -448,7 +556,19 @@ module.exports = [
         created_at: "2019-11-15T06:50:16.000000Z",
         supplier_name: "Casella Family Brands",
         brand_name: "Peter Lehmann",
-        vintage: "2018", active: true
+        vintage: "2018", active: true,
+        depots: [
+            {
+                id: 1,
+                name: 'test',
+                qty: 0,
+            },
+            {
+                id: 2,
+                name: 'test-2',
+                qty: 2
+            }
+        ],
     }, {
         id: 602,
         supplier_id: 23,
@@ -493,7 +613,19 @@ module.exports = [
         created_at: "2020-04-01T05:29:53.000000Z",
         supplier_name: "Casella Family Brands",
         brand_name: "Peter Lehmann",
-        vintage: "2017", active: true
+        vintage: "2017", active: true,
+        depots: [
+            {
+                id: 1,
+                name: 'test',
+                qty: 0,
+            },
+            {
+                id: 2,
+                name: 'test-2',
+                qty: 2
+            }
+        ],
     }, {
         id: 330,
         supplier_id: 23,
@@ -538,7 +670,19 @@ module.exports = [
         created_at: "2019-11-15T06:50:12.000000Z",
         supplier_name: "Casella Family Brands",
         brand_name: "Peter Lehmann",
-        vintage: "2018", active: true
+        vintage: "2018", active: true,
+        depots: [
+            {
+                id: 1,
+                name: 'test',
+                qty: 0,
+            },
+            {
+                id: 2,
+                name: 'test-2',
+                qty: 2
+            }
+        ],
     }, {
         id: 974,
         supplier_id: 23,
@@ -583,7 +727,19 @@ module.exports = [
         created_at: "2020-07-08T04:24:18.000000Z",
         supplier_name: "Casella Family Brands",
         brand_name: "Peter Lehmann",
-        vintage: "2016", active: true
+        vintage: "2016", active: true,
+        depots: [
+            {
+                id: 1,
+                name: 'test',
+                qty: 0,
+            },
+            {
+                id: 2,
+                name: 'test-2',
+                qty: 2
+            }
+        ],
     }, {
         id: 311,
         supplier_id: 23,
@@ -628,7 +784,19 @@ module.exports = [
         created_at: "2019-11-15T06:50:02.000000Z",
         supplier_name: "Casella Family Brands",
         brand_name: "Peter Lehmann",
-        vintage: "2016", active: true
+        vintage: "2016", active: true,
+        depots: [
+            {
+                id: 1,
+                name: 'test',
+                qty: 0,
+            },
+            {
+                id: 2,
+                name: 'test-2',
+                qty: 2
+            }
+        ],
     }, {
         id: 967,
         supplier_id: 23,
@@ -673,7 +841,19 @@ module.exports = [
         created_at: "2020-07-08T03:48:24.000000Z",
         supplier_name: "Casella Family Brands",
         brand_name: "Peter Lehmann",
-        vintage: "2018", active: true
+        vintage: "2018", active: true,
+        depots: [
+            {
+                id: 1,
+                name: 'test',
+                qty: 0,
+            },
+            {
+                id: 2,
+                name: 'test-2',
+                qty: 2
+            }
+        ],
     }, {
         id: 665,
         supplier_id: 23,
@@ -718,7 +898,19 @@ module.exports = [
         created_at: "2020-04-23T05:40:00.000000Z",
         supplier_name: "Casella Family Brands",
         brand_name: "Peter Lehmann",
-        vintage: "2014", active: true
+        vintage: "2014", active: true,
+        depots: [
+            {
+                id: 1,
+                name: 'test',
+                qty: 0,
+            },
+            {
+                id: 2,
+                name: 'test-2',
+                qty: 2
+            }
+        ],
     }, {
         id: 325,
         supplier_id: 23,
@@ -763,7 +955,19 @@ module.exports = [
         created_at: "2019-11-15T06:50:09.000000Z",
         supplier_name: "Casella Family Brands",
         brand_name: "Peter Lehmann",
-        vintage: "2017", active: true
+        vintage: "2017", active: true,
+        depots: [
+            {
+                id: 1,
+                name: 'test',
+                qty: 0,
+            },
+            {
+                id: 2,
+                name: 'test-2',
+                qty: 2
+            }
+        ],
     }, {
         id: 978,
         supplier_id: 23,
@@ -808,7 +1012,19 @@ module.exports = [
         created_at: "2020-07-08T04:43:01.000000Z",
         supplier_name: "Casella Family Brands",
         brand_name: "Peter Lehmann",
-        vintage: "2019", active: true
+        vintage: "2019", active: true,
+        depots: [
+            {
+                id: 1,
+                name: 'test',
+                qty: 0,
+            },
+            {
+                id: 2,
+                name: 'test-2',
+                qty: 2
+            }
+        ],
     }, {
         id: 315,
         supplier_id: 23,
@@ -853,7 +1069,19 @@ module.exports = [
         created_at: "2019-11-15T06:50:04.000000Z",
         supplier_name: "Casella Family Brands",
         brand_name: "Peter Lehmann",
-        vintage: "2016", active: true
+        vintage: "2016", active: true,
+        depots: [
+            {
+                id: 1,
+                name: 'test',
+                qty: 0,
+            },
+            {
+                id: 2,
+                name: 'test-2',
+                qty: 2
+            }
+        ],
     }, {
         id: 272,
         supplier_id: 23,
@@ -898,7 +1126,19 @@ module.exports = [
         created_at: "2019-11-15T06:49:43.000000Z",
         supplier_name: "Casella Family Brands",
         brand_name: "Peter Lehmann",
-        vintage: "2002", active: true
+        vintage: "2002", active: true,
+        depots: [
+            {
+                id: 1,
+                name: 'test',
+                qty: 0,
+            },
+            {
+                id: 2,
+                name: 'test-2',
+                qty: 2
+            }
+        ],
     }, {
         id: 971,
         supplier_id: 23,
@@ -943,7 +1183,19 @@ module.exports = [
         created_at: "2020-07-08T04:10:24.000000Z",
         supplier_name: "Casella Family Brands",
         brand_name: "Peter Lehmann",
-        vintage: "2018", active: true
+        vintage: "2018", active: true,
+        depots: [
+            {
+                id: 1,
+                name: 'test',
+                qty: 0,
+            },
+            {
+                id: 2,
+                name: 'test-2',
+                qty: 2
+            }
+        ],
     }, {
         id: 299,
         supplier_id: 23,
@@ -988,7 +1240,19 @@ module.exports = [
         created_at: "2019-11-15T06:49:56.000000Z",
         supplier_name: "Casella Family Brands",
         brand_name: "Peter Lehmann",
-        vintage: "2015", active: true
+        vintage: "2015", active: true,
+        depots: [
+            {
+                id: 1,
+                name: 'test',
+                qty: 0,
+            },
+            {
+                id: 2,
+                name: 'test-2',
+                qty: 2
+            }
+        ],
     }, {
         id: 319,
         supplier_id: 23,
@@ -1033,7 +1297,19 @@ module.exports = [
         created_at: "2019-11-15T06:50:06.000000Z",
         supplier_name: "Casella Family Brands",
         brand_name: "Peter Lehmann",
-        vintage: "2017", active: true
+        vintage: "2017", active: true,
+        depots: [
+            {
+                id: 1,
+                name: 'test',
+                qty: 0,
+            },
+            {
+                id: 2,
+                name: 'test-2',
+                qty: 2
+            }
+        ],
     }, {
         id: 285,
         supplier_id: 23,
@@ -1078,7 +1354,19 @@ module.exports = [
         created_at: "2019-11-15T06:49:49.000000Z",
         supplier_name: "Casella Family Brands",
         brand_name: "Peter Lehmann",
-        vintage: "2013", active: true
+        vintage: "2013", active: true,
+        depots: [
+            {
+                id: 1,
+                name: 'test',
+                qty: 0,
+            },
+            {
+                id: 2,
+                name: 'test-2',
+                qty: 2
+            }
+        ],
     }, {
         id: 312,
         supplier_id: 23,
@@ -1123,7 +1411,19 @@ module.exports = [
         created_at: "2019-11-15T06:50:03.000000Z",
         supplier_name: "Casella Family Brands",
         brand_name: "Peter Lehmann",
-        vintage: "2016", active: true
+        vintage: "2016", active: true,
+        depots: [
+            {
+                id: 1,
+                name: 'test',
+                qty: 0,
+            },
+            {
+                id: 2,
+                name: 'test-2',
+                qty: 2
+            }
+        ],
     }, {
         id: 276,
         supplier_id: 23,
@@ -1168,7 +1468,19 @@ module.exports = [
         created_at: "2019-11-15T06:49:45.000000Z",
         supplier_name: "Casella Family Brands",
         brand_name: "Peter Lehmann",
-        vintage: "2012", active: true
+        vintage: "2012", active: true,
+        depots: [
+            {
+                id: 1,
+                name: 'test',
+                qty: 0,
+            },
+            {
+                id: 2,
+                name: 'test-2',
+                qty: 2
+            }
+        ],
     }, {
         id: 975,
         supplier_id: 23,
@@ -1213,7 +1525,19 @@ module.exports = [
         created_at: "2020-07-08T04:35:39.000000Z",
         supplier_name: "Casella Family Brands",
         brand_name: "Peter Lehmann",
-        vintage: "2019", active: true
+        vintage: "2019", active: true,
+        depots: [
+            {
+                id: 1,
+                name: 'test',
+                qty: 0,
+            },
+            {
+                id: 2,
+                name: 'test-2',
+                qty: 2
+            }
+        ],
     }, {
         id: 968,
         supplier_id: 23,
@@ -1258,7 +1582,19 @@ module.exports = [
         created_at: "2020-07-08T03:57:02.000000Z",
         supplier_name: "Casella Family Brands",
         brand_name: "Peter Lehmann",
-        vintage: "2018", active: true
+        vintage: "2018", active: true,
+        depots: [
+            {
+                id: 1,
+                name: 'test',
+                qty: 0,
+            },
+            {
+                id: 2,
+                name: 'test-2',
+                qty: 2
+            }
+        ],
     }, {
         id: 304,
         supplier_id: 23,
@@ -1303,7 +1639,19 @@ module.exports = [
         created_at: "2019-11-15T06:49:58.000000Z",
         supplier_name: "Casella Family Brands",
         brand_name: "Peter Lehmann",
-        vintage: "2015", active: true
+        vintage: "2015", active: true,
+        depots: [
+            {
+                id: 1,
+                name: 'test',
+                qty: 0,
+            },
+            {
+                id: 2,
+                name: 'test-2',
+                qty: 2
+            }
+        ],
     }, {
         id: 335,
         supplier_id: 23,
@@ -1348,7 +1696,19 @@ module.exports = [
         created_at: "2019-11-15T06:50:15.000000Z",
         supplier_name: "Casella Family Brands",
         brand_name: "Peter Lehmann",
-        vintage: "2018", active: true
+        vintage: "2018", active: true,
+        depots: [
+            {
+                id: 1,
+                name: 'test',
+                qty: 0,
+            },
+            {
+                id: 2,
+                name: 'test-2',
+                qty: 2
+            }
+        ],
     }, {
         id: 326,
         supplier_id: 23,
@@ -1393,7 +1753,19 @@ module.exports = [
         created_at: "2019-11-15T06:50:10.000000Z",
         supplier_name: "Casella Family Brands",
         brand_name: "Peter Lehmann",
-        vintage: "2017", active: true
+        vintage: "2017", active: true,
+        depots: [
+            {
+                id: 1,
+                name: 'test',
+                qty: 0,
+            },
+            {
+                id: 2,
+                name: 'test-2',
+                qty: 2
+            }
+        ],
     }, {
         id: 282,
         supplier_id: 23,
@@ -1438,7 +1810,19 @@ module.exports = [
         created_at: "2019-11-15T06:49:48.000000Z",
         supplier_name: "Casella Family Brands",
         brand_name: "Peter Lehmann",
-        vintage: "2014", active: true
+        vintage: "2014", active: true,
+        depots: [
+            {
+                id: 1,
+                name: 'test',
+                qty: 0,
+            },
+            {
+                id: 2,
+                name: 'test-2',
+                qty: 2
+            }
+        ],
     }, {
         id: 316,
         supplier_id: 23,
@@ -1483,7 +1867,19 @@ module.exports = [
         created_at: "2019-11-15T06:50:05.000000Z",
         supplier_name: "Casella Family Brands",
         brand_name: "Peter Lehmann",
-        vintage: "2017", active: true
+        vintage: "2017", active: true,
+        depots: [
+            {
+                id: 1,
+                name: 'test',
+                qty: 0,
+            },
+            {
+                id: 2,
+                name: 'test-2',
+                qty: 2
+            }
+        ],
     }, {
         id: 309,
         supplier_id: 23,
@@ -1528,7 +1924,19 @@ module.exports = [
         created_at: "2019-11-15T06:50:01.000000Z",
         supplier_name: "Casella Family Brands",
         brand_name: "Peter Lehmann",
-        vintage: "2017", active: true
+        vintage: "2017", active: true,
+        depots: [
+            {
+                id: 1,
+                name: 'test',
+                qty: 0,
+            },
+            {
+                id: 2,
+                name: 'test-2',
+                qty: 2
+            }
+        ],
     }, {
         id: 293,
         supplier_id: 23,
@@ -1573,7 +1981,19 @@ module.exports = [
         created_at: "2019-11-15T06:49:53.000000Z",
         supplier_name: "Casella Family Brands",
         brand_name: "Peter Lehmann",
-        vintage: "2014", active: true
+        vintage: "2014", active: true,
+        depots: [
+            {
+                id: 1,
+                name: 'test',
+                qty: 0,
+            },
+            {
+                id: 2,
+                name: 'test-2',
+                qty: 2
+            }
+        ],
     }, {
         id: 332,
         supplier_id: 23,
@@ -1618,7 +2038,19 @@ module.exports = [
         created_at: "2019-11-15T06:50:13.000000Z",
         supplier_name: "Casella Family Brands",
         brand_name: "Peter Lehmann",
-        vintage: "2018", active: true
+        vintage: "2018", active: true,
+        depots: [
+            {
+                id: 1,
+                name: 'test',
+                qty: 0,
+            },
+            {
+                id: 2,
+                name: 'test-2',
+                qty: 2
+            }
+        ],
     }, {
         id: 321,
         supplier_id: 23,
@@ -1663,7 +2095,19 @@ module.exports = [
         created_at: "2019-11-15T06:50:07.000000Z",
         supplier_name: "Casella Family Brands",
         brand_name: "Peter Lehmann",
-        vintage: "2017", active: true
+        vintage: "2017", active: true,
+        depots: [
+            {
+                id: 1,
+                name: 'test',
+                qty: 0,
+            },
+            {
+                id: 2,
+                name: 'test-2',
+                qty: 2
+            }
+        ],
     }, {
         id: 286,
         supplier_id: 23,
@@ -1708,7 +2152,19 @@ module.exports = [
         created_at: "2019-11-15T06:49:49.000000Z",
         supplier_name: "Casella Family Brands",
         brand_name: "Peter Lehmann",
-        vintage: "2013", active: true
+        vintage: "2013", active: true,
+        depots: [
+            {
+                id: 1,
+                name: 'test',
+                qty: 0,
+            },
+            {
+                id: 2,
+                name: 'test-2',
+                qty: 2
+            }
+        ],
     }, {
         id: 976,
         supplier_id: 23,
@@ -1753,7 +2209,19 @@ module.exports = [
         created_at: "2020-07-08T04:37:06.000000Z",
         supplier_name: "Casella Family Brands",
         brand_name: "Peter Lehmann",
-        vintage: "2019", active: true
+        vintage: "2019", active: true,
+        depots: [
+            {
+                id: 1,
+                name: 'test',
+                qty: 0,
+            },
+            {
+                id: 2,
+                name: 'test-2',
+                qty: 2
+            }
+        ],
     }, {
         id: 305,
         supplier_id: 23,
@@ -1798,7 +2266,19 @@ module.exports = [
         created_at: "2019-11-15T06:49:58.000000Z",
         supplier_name: "Casella Family Brands",
         brand_name: "Peter Lehmann",
-        vintage: "2015", active: true
+        vintage: "2015", active: true,
+        depots: [
+            {
+                id: 1,
+                name: 'test',
+                qty: 0,
+            },
+            {
+                id: 2,
+                name: 'test-2',
+                qty: 2
+            }
+        ],
     }, {
         id: 969,
         supplier_id: 23,
@@ -1843,7 +2323,19 @@ module.exports = [
         created_at: "2020-07-08T03:59:41.000000Z",
         supplier_name: "Casella Family Brands",
         brand_name: "Peter Lehmann",
-        vintage: "2018", active: true
+        vintage: "2018", active: true,
+        depots: [
+            {
+                id: 1,
+                name: 'test',
+                qty: 0,
+            },
+            {
+                id: 2,
+                name: 'test-2',
+                qty: 2
+            }
+        ],
     }, {
         id: 337,
         supplier_id: 23,
@@ -1888,7 +2380,19 @@ module.exports = [
         created_at: "2019-11-15T06:50:16.000000Z",
         supplier_name: "Casella Family Brands",
         brand_name: "Peter Lehmann",
-        vintage: "2018", active: true
+        vintage: "2018", active: true,
+        depots: [
+            {
+                id: 1,
+                name: 'test',
+                qty: 0,
+            },
+            {
+                id: 2,
+                name: 'test-2',
+                qty: 2
+            }
+        ],
     }, {
         id: 2081,
         supplier_id: 23,
@@ -1933,7 +2437,19 @@ module.exports = [
         created_at: "2020-12-03T03:07:21.000000Z",
         supplier_name: "Casella Family Brands",
         brand_name: "Peter Lehmann",
-        vintage: "2016", active: true
+        vintage: "2016", active: true,
+        depots: [
+            {
+                id: 1,
+                name: 'test',
+                qty: 0,
+            },
+            {
+                id: 2,
+                name: 'test-2',
+                qty: 2
+            }
+        ],
     }, {
         id: 328,
         supplier_id: 23,
@@ -1978,7 +2494,19 @@ module.exports = [
         created_at: "2019-11-15T06:50:11.000000Z",
         supplier_name: "Casella Family Brands",
         brand_name: "Peter Lehmann",
-        vintage: "2018", active: true
+        vintage: "2018", active: true,
+        depots: [
+            {
+                id: 1,
+                name: 'test',
+                qty: 0,
+            },
+            {
+                id: 2,
+                name: 'test-2',
+                qty: 2
+            }
+        ],
     }, {
         id: 290,
         supplier_id: 23,
@@ -2023,7 +2551,19 @@ module.exports = [
         created_at: "2019-11-15T06:49:51.000000Z",
         supplier_name: "Casella Family Brands",
         brand_name: "Peter Lehmann",
-        vintage: "2013", active: true
+        vintage: "2013", active: true,
+        depots: [
+            {
+                id: 1,
+                name: 'test',
+                qty: 0,
+            },
+            {
+                id: 2,
+                name: 'test-2',
+                qty: 2
+            }
+        ],
     }, {
         id: 973,
         supplier_id: 23,
@@ -2068,7 +2608,19 @@ module.exports = [
         created_at: "2020-07-08T04:20:10.000000Z",
         supplier_name: "Casella Family Brands",
         brand_name: "Peter Lehmann",
-        vintage: "2019", active: true
+        vintage: "2019", active: true,
+        depots: [
+            {
+                id: 1,
+                name: 'test',
+                qty: 0,
+            },
+            {
+                id: 2,
+                name: 'test-2',
+                qty: 2
+            }
+        ],
     }, {
         id: 310,
         supplier_id: 23,
@@ -2113,7 +2665,19 @@ module.exports = [
         created_at: "2019-11-15T06:50:01.000000Z",
         supplier_name: "Casella Family Brands",
         brand_name: "Peter Lehmann",
-        vintage: "2016", active: true
+        vintage: "2016", active: true,
+        depots: [
+            {
+                id: 1,
+                name: 'test',
+                qty: 0,
+            },
+            {
+                id: 2,
+                name: 'test-2',
+                qty: 2
+            }
+        ],
     }, {
         id: 1519,
         supplier_id: 23,
@@ -2158,7 +2722,19 @@ module.exports = [
         created_at: "2020-09-16T05:06:49.000000Z",
         supplier_name: "Casella Family Brands",
         brand_name: "Peter Lehmann",
-        vintage: "2016", active: true
+        vintage: "2016", active: true,
+        depots: [
+            {
+                id: 1,
+                name: 'test',
+                qty: 0,
+            },
+            {
+                id: 2,
+                name: 'test-2',
+                qty: 2
+            }
+        ],
     }, {
         id: 287,
         supplier_id: 23,
@@ -2203,7 +2779,19 @@ module.exports = [
         created_at: "2019-11-15T06:49:50.000000Z",
         supplier_name: "Casella Family Brands",
         brand_name: "Peter Lehmann",
-        vintage: "2013", active: true
+        vintage: "2013", active: true,
+        depots: [
+            {
+                id: 1,
+                name: 'test',
+                qty: 0,
+            },
+            {
+                id: 2,
+                name: 'test-2',
+                qty: 2
+            }
+        ],
     }, {
         id: 314,
         supplier_id: 23,
@@ -2248,7 +2836,19 @@ module.exports = [
         created_at: "2019-11-15T06:50:04.000000Z",
         supplier_name: "Casella Family Brands",
         brand_name: "Peter Lehmann",
-        vintage: "2017", active: true
+        vintage: "2017", active: true,
+        depots: [
+            {
+                id: 1,
+                name: 'test',
+                qty: 0,
+            },
+            {
+                id: 2,
+                name: 'test-2',
+                qty: 2
+            }
+        ],
     }, {
         id: 348,
         supplier_id: 23,
@@ -2293,7 +2893,19 @@ module.exports = [
         created_at: "2019-11-15T06:50:21.000000Z",
         supplier_name: "Casella Family Brands",
         brand_name: "Morris ",
-        vintage: null, active: true
+        vintage: null, active: true,
+        depots: [
+            {
+                id: 1,
+                name: 'test',
+                qty: 0,
+            },
+            {
+                id: 2,
+                name: 'test-2',
+                qty: 2
+            }
+        ],
     }, {
         id: 284,
         supplier_id: 23,
@@ -2338,7 +2950,19 @@ module.exports = [
         created_at: "2019-11-15T06:49:49.000000Z",
         supplier_name: "Casella Family Brands",
         brand_name: "Morris ",
-        vintage: "2016", active: true
+        vintage: "2016", active: true,
+        depots: [
+            {
+                id: 1,
+                name: 'test',
+                qty: 0,
+            },
+            {
+                id: 2,
+                name: 'test-2',
+                qty: 2
+            }
+        ],
     }, {
         id: 1215,
         supplier_id: 23,
@@ -2383,7 +3007,19 @@ module.exports = [
         created_at: "2020-08-13T00:07:44.000000Z",
         supplier_name: "Casella Family Brands",
         brand_name: "Morris ",
-        vintage: "2016", active: true
+        vintage: "2016", active: true,
+        depots: [
+            {
+                id: 1,
+                name: 'test',
+                qty: 0,
+            },
+            {
+                id: 2,
+                name: 'test-2',
+                qty: 2
+            }
+        ],
     }, {
         id: 353,
         supplier_id: 23,
@@ -2428,7 +3064,19 @@ module.exports = [
         created_at: "2019-11-15T06:50:24.000000Z",
         supplier_name: "Casella Family Brands",
         brand_name: "Morris ",
-        vintage: null, active: true
+        vintage: null, active: true,
+        depots: [
+            {
+                id: 1,
+                name: 'test',
+                qty: 0,
+            },
+            {
+                id: 2,
+                name: 'test-2',
+                qty: 2
+            }
+        ],
     }, {
         id: 344,
         supplier_id: 23,
@@ -2473,7 +3121,19 @@ module.exports = [
         created_at: "2019-11-15T06:50:19.000000Z",
         supplier_name: "Casella Family Brands",
         brand_name: "Morris ",
-        vintage: null, active: true
+        vintage: null, active: true,
+        depots: [
+            {
+                id: 1,
+                name: 'test',
+                qty: 0,
+            },
+            {
+                id: 2,
+                name: 'test-2',
+                qty: 2
+            }
+        ],
     }, {
         id: 1313,
         supplier_id: 23,
@@ -2518,7 +3178,19 @@ module.exports = [
         created_at: "2020-08-25T00:43:36.000000Z",
         supplier_name: "Casella Family Brands",
         brand_name: "Morris ",
-        vintage: "2016", active: true
+        vintage: "2016", active: true,
+        depots: [
+            {
+                id: 1,
+                name: 'test',
+                qty: 0,
+            },
+            {
+                id: 2,
+                name: 'test-2',
+                qty: 2
+            }
+        ],
     }, {
         id: 349,
         supplier_id: 23,
@@ -2563,7 +3235,19 @@ module.exports = [
         created_at: "2019-11-15T06:50:22.000000Z",
         supplier_name: "Casella Family Brands",
         brand_name: "Morris ",
-        vintage: null, active: true
+        vintage: null, active: true,
+        depots: [
+            {
+                id: 1,
+                name: 'test',
+                qty: 0,
+            },
+            {
+                id: 2,
+                name: 'test-2',
+                qty: 2
+            }
+        ],
     }, {
         id: 339,
         supplier_id: 23,
@@ -2608,7 +3292,19 @@ module.exports = [
         created_at: "2019-11-15T06:50:17.000000Z",
         supplier_name: "Casella Family Brands",
         brand_name: "Morris ",
-        vintage: null, active: true
+        vintage: null, active: true,
+        depots: [
+            {
+                id: 1,
+                name: 'test',
+                qty: 0,
+            },
+            {
+                id: 2,
+                name: 'test-2',
+                qty: 2
+            }
+        ],
     }, {
         id: 354,
         supplier_id: 23,
@@ -2653,7 +3349,19 @@ module.exports = [
         created_at: "2019-11-15T06:50:24.000000Z",
         supplier_name: "Casella Family Brands",
         brand_name: "Morris ",
-        vintage: null, active: true
+        vintage: null, active: true,
+        depots: [
+            {
+                id: 1,
+                name: 'test',
+                qty: 0,
+            },
+            {
+                id: 2,
+                name: 'test-2',
+                qty: 2
+            }
+        ],
     }, {
         id: 345,
         supplier_id: 23,
@@ -2698,7 +3406,19 @@ module.exports = [
         created_at: "2019-11-15T06:50:20.000000Z",
         supplier_name: "Casella Family Brands",
         brand_name: "Morris ",
-        vintage: null, active: true
+        vintage: null, active: true,
+        depots: [
+            {
+                id: 1,
+                name: 'test',
+                qty: 0,
+            },
+            {
+                id: 2,
+                name: 'test-2',
+                qty: 2
+            }
+        ],
     }, {
         id: 289,
         supplier_id: 23,
@@ -2743,7 +3463,19 @@ module.exports = [
         created_at: "2019-11-15T06:49:51.000000Z",
         supplier_name: "Casella Family Brands",
         brand_name: "Morris ",
-        vintage: "2013", active: true
+        vintage: "2013", active: true,
+        depots: [
+            {
+                id: 1,
+                name: 'test',
+                qty: 0,
+            },
+            {
+                id: 2,
+                name: 'test-2',
+                qty: 2
+            }
+        ],
     }, {
         id: 1369,
         supplier_id: 23,
@@ -2788,7 +3520,19 @@ module.exports = [
         created_at: "2020-09-10T01:08:41.000000Z",
         supplier_name: "Casella Family Brands",
         brand_name: "Morris ",
-        vintage: "2019", active: true
+        vintage: "2019", active: true,
+        depots: [
+            {
+                id: 1,
+                name: 'test',
+                qty: 0,
+            },
+            {
+                id: 2,
+                name: 'test-2',
+                qty: 2
+            }
+        ],
     }, {
         id: 350,
         supplier_id: 23,
@@ -2833,7 +3577,19 @@ module.exports = [
         created_at: "2019-11-15T06:50:22.000000Z",
         supplier_name: "Casella Family Brands",
         brand_name: "Morris ",
-        vintage: null, active: true
+        vintage: null, active: true,
+        depots: [
+            {
+                id: 1,
+                name: 'test',
+                qty: 0,
+            },
+            {
+                id: 2,
+                name: 'test-2',
+                qty: 2
+            }
+        ],
     }, {
         id: 340,
         supplier_id: 23,
@@ -2878,7 +3634,19 @@ module.exports = [
         created_at: "2019-11-15T06:50:17.000000Z",
         supplier_name: "Casella Family Brands",
         brand_name: "Morris ",
-        vintage: null, active: true
+        vintage: null, active: true,
+        depots: [
+            {
+                id: 1,
+                name: 'test',
+                qty: 0,
+            },
+            {
+                id: 2,
+                name: 'test-2',
+                qty: 2
+            }
+        ],
     }, {
         id: 355,
         supplier_id: 23,
@@ -2923,7 +3691,19 @@ module.exports = [
         created_at: "2019-11-15T06:50:24.000000Z",
         supplier_name: "Casella Family Brands",
         brand_name: "Morris ",
-        vintage: null, active: true
+        vintage: null, active: true,
+        depots: [
+            {
+                id: 1,
+                name: 'test',
+                qty: 0,
+            },
+            {
+                id: 2,
+                name: 'test-2',
+                qty: 2
+            }
+        ],
     }, {
         id: 347,
         supplier_id: 23,
@@ -2968,7 +3748,19 @@ module.exports = [
         created_at: "2019-11-15T06:50:21.000000Z",
         supplier_name: "Casella Family Brands",
         brand_name: "Morris ",
-        vintage: null, active: true
+        vintage: null, active: true,
+        depots: [
+            {
+                id: 1,
+                name: 'test',
+                qty: 0,
+            },
+            {
+                id: 2,
+                name: 'test-2',
+                qty: 2
+            }
+        ],
     }, {
         id: 297,
         supplier_id: 23,
@@ -3013,7 +3805,19 @@ module.exports = [
         created_at: "2019-11-15T06:49:55.000000Z",
         supplier_name: "Casella Family Brands",
         brand_name: "Morris ",
-        vintage: "2015", active: true
+        vintage: "2015", active: true,
+        depots: [
+            {
+                id: 1,
+                name: 'test',
+                qty: 0,
+            },
+            {
+                id: 2,
+                name: 'test-2',
+                qty: 2
+            }
+        ],
     }, {
         id: 1375,
         supplier_id: 23,
@@ -3058,7 +3862,19 @@ module.exports = [
         created_at: "2020-09-11T02:45:30.000000Z",
         supplier_name: "Casella Family Brands",
         brand_name: "Morris ",
-        vintage: "2017", active: true
+        vintage: "2017", active: true,
+        depots: [
+            {
+                id: 1,
+                name: 'test',
+                qty: 0,
+            },
+            {
+                id: 2,
+                name: 'test-2',
+                qty: 2
+            }
+        ],
     }, {
         id: 283,
         supplier_id: 23,
@@ -3103,7 +3919,19 @@ module.exports = [
         created_at: "2019-11-15T06:49:48.000000Z",
         supplier_name: "Casella Family Brands",
         brand_name: "Morris ",
-        vintage: "2013", active: true
+        vintage: "2013", active: true,
+        depots: [
+            {
+                id: 1,
+                name: 'test',
+                qty: 0,
+            },
+            {
+                id: 2,
+                name: 'test-2',
+                qty: 2
+            }
+        ],
     }, {
         id: 2168,
         supplier_id: 23,
@@ -3148,7 +3976,19 @@ module.exports = [
         created_at: "2021-01-18T00:03:39.000000Z",
         supplier_name: "Casella Family Brands",
         brand_name: "Morris ",
-        vintage: "2016", active: true
+        vintage: "2016", active: true,
+        depots: [
+            {
+                id: 1,
+                name: 'test',
+                qty: 0,
+            },
+            {
+                id: 2,
+                name: 'test-2',
+                qty: 2
+            }
+        ],
     }, {
         id: 444,
         supplier_id: 23,
@@ -3193,7 +4033,19 @@ module.exports = [
         created_at: "2020-01-28T05:17:14.000000Z",
         supplier_name: "Casella Family Brands",
         brand_name: "Mixed Pack",
-        vintage: null, active: true
+        vintage: null, active: true,
+        depots: [
+            {
+                id: 1,
+                name: 'test',
+                qty: 0,
+            },
+            {
+                id: 2,
+                name: 'test-2',
+                qty: 2
+            }
+        ],
     }, {
         id: 360,
         supplier_id: 23,
@@ -3238,7 +4090,19 @@ module.exports = [
         created_at: "2019-11-15T06:50:27.000000Z",
         supplier_name: "Casella Family Brands",
         brand_name: "Mixed Pack",
-        vintage: null, active: true
+        vintage: null, active: true,
+        depots: [
+            {
+                id: 1,
+                name: 'test',
+                qty: 0,
+            },
+            {
+                id: 2,
+                name: 'test-2',
+                qty: 2
+            }
+        ],
     }, {
         id: 364,
         supplier_id: 23,
@@ -3283,7 +4147,19 @@ module.exports = [
         created_at: "2019-11-15T06:50:29.000000Z",
         supplier_name: "Casella Family Brands",
         brand_name: "Mixed Pack",
-        vintage: null, active: true
+        vintage: null, active: true,
+        depots: [
+            {
+                id: 1,
+                name: 'test',
+                qty: 0,
+            },
+            {
+                id: 2,
+                name: 'test-2',
+                qty: 2
+            }
+        ],
     }, {
         id: 357,
         supplier_id: 23,
@@ -3328,7 +4204,19 @@ module.exports = [
         created_at: "2019-11-15T06:50:26.000000Z",
         supplier_name: "Casella Family Brands",
         brand_name: "Mixed Pack",
-        vintage: null, active: true
+        vintage: null, active: true,
+        depots: [
+            {
+                id: 1,
+                name: 'test',
+                qty: 0,
+            },
+            {
+                id: 2,
+                name: 'test-2',
+                qty: 2
+            }
+        ],
     }, {
         id: 361,
         supplier_id: 23,
@@ -3373,7 +4261,19 @@ module.exports = [
         created_at: "2019-11-15T06:50:27.000000Z",
         supplier_name: "Casella Family Brands",
         brand_name: "Mixed Pack",
-        vintage: null, active: true
+        vintage: null, active: true,
+        depots: [
+            {
+                id: 1,
+                name: 'test',
+                qty: 0,
+            },
+            {
+                id: 2,
+                name: 'test-2',
+                qty: 2
+            }
+        ],
     }, {
         id: 358,
         supplier_id: 23,
@@ -3418,7 +4318,19 @@ module.exports = [
         created_at: "2019-11-15T06:50:26.000000Z",
         supplier_name: "Casella Family Brands",
         brand_name: "Mixed Pack",
-        vintage: null, active: true
+        vintage: null, active: true,
+        depots: [
+            {
+                id: 1,
+                name: 'test',
+                qty: 0,
+            },
+            {
+                id: 2,
+                name: 'test-2',
+                qty: 2
+            }
+        ],
     }, {
         id: 362,
         supplier_id: 23,
@@ -3463,7 +4375,19 @@ module.exports = [
         created_at: "2019-11-15T06:50:28.000000Z",
         supplier_name: "Casella Family Brands",
         brand_name: "Mixed Pack",
-        vintage: null, active: true
+        vintage: null, active: true,
+        depots: [
+            {
+                id: 1,
+                name: 'test',
+                qty: 0,
+            },
+            {
+                id: 2,
+                name: 'test-2',
+                qty: 2
+            }
+        ],
     }, {
         id: 359,
         supplier_id: 23,
@@ -3508,7 +4432,19 @@ module.exports = [
         created_at: "2019-11-15T06:50:26.000000Z",
         supplier_name: "Casella Family Brands",
         brand_name: "Mixed Pack",
-        vintage: null, active: true
+        vintage: null, active: true,
+        depots: [
+            {
+                id: 1,
+                name: 'test',
+                qty: 0,
+            },
+            {
+                id: 2,
+                name: 'test-2',
+                qty: 2
+            }
+        ],
     }, {
         id: 363,
         supplier_id: 23,
@@ -3553,7 +4489,19 @@ module.exports = [
         created_at: "2019-11-15T06:50:28.000000Z",
         supplier_name: "Casella Family Brands",
         brand_name: "Mixed Pack",
-        vintage: null, active: true
+        vintage: null, active: true,
+        depots: [
+            {
+                id: 1,
+                name: 'test',
+                qty: 0,
+            },
+            {
+                id: 2,
+                name: 'test-2',
+                qty: 2
+            }
+        ],
     }, {
         id: 356,
         supplier_id: 23,
@@ -3598,7 +4546,19 @@ module.exports = [
         created_at: "2019-11-15T06:50:25.000000Z",
         supplier_name: "Casella Family Brands",
         brand_name: "Mixed Pack",
-        vintage: null, active: true
+        vintage: null, active: true,
+        depots: [
+            {
+                id: 1,
+                name: 'test',
+                qty: 0,
+            },
+            {
+                id: 2,
+                name: 'test-2',
+                qty: 2
+            }
+        ],
     }, {
         id: 537,
         supplier_id: 23,
@@ -3643,7 +4603,19 @@ module.exports = [
         created_at: "2020-03-31T03:28:21.000000Z",
         supplier_name: "Casella Family Brands",
         brand_name: "CFB YellowTail",
-        vintage: "19", active: true
+        vintage: "19", active: true,
+        depots: [
+            {
+                id: 1,
+                name: 'test',
+                qty: 0,
+            },
+            {
+                id: 2,
+                name: 'test-2',
+                qty: 2
+            }
+        ],
     }, {
         id: 527,
         supplier_id: 23,
@@ -3688,7 +4660,19 @@ module.exports = [
         created_at: "2020-03-31T03:28:16.000000Z",
         supplier_name: "Casella Family Brands",
         brand_name: "CFB YellowTail",
-        vintage: "19", active: true
+        vintage: "19", active: true,
+        depots: [
+            {
+                id: 1,
+                name: 'test',
+                qty: 0,
+            },
+            {
+                id: 2,
+                name: 'test-2',
+                qty: 2
+            }
+        ],
     }, {
         id: 550,
         supplier_id: 23,
@@ -3733,7 +4717,19 @@ module.exports = [
         created_at: "2020-03-31T03:28:28.000000Z",
         supplier_name: "Casella Family Brands",
         brand_name: "CFB YellowTail",
-        vintage: null, active: true
+        vintage: null, active: true,
+        depots: [
+            {
+                id: 1,
+                name: 'test',
+                qty: 0,
+            },
+            {
+                id: 2,
+                name: 'test-2',
+                qty: 2
+            }
+        ],
     }, {
         id: 541,
         supplier_id: 23,
@@ -3778,7 +4774,19 @@ module.exports = [
         created_at: "2020-03-31T03:28:23.000000Z",
         supplier_name: "Casella Family Brands",
         brand_name: "CFB YellowTail",
-        vintage: null, active: true
+        vintage: null, active: true,
+        depots: [
+            {
+                id: 1,
+                name: 'test',
+                qty: 0,
+            },
+            {
+                id: 2,
+                name: 'test-2',
+                qty: 2
+            }
+        ],
     }, {
         id: 533,
         supplier_id: 23,
@@ -3823,7 +4831,19 @@ module.exports = [
         created_at: "2020-03-31T03:28:19.000000Z",
         supplier_name: "Casella Family Brands",
         brand_name: "CFB YellowTail",
-        vintage: "19", active: true
+        vintage: "19", active: true,
+        depots: [
+            {
+                id: 1,
+                name: 'test',
+                qty: 0,
+            },
+            {
+                id: 2,
+                name: 'test-2',
+                qty: 2
+            }
+        ],
     }, {
         id: 558,
         supplier_id: 23,
@@ -3868,7 +4888,19 @@ module.exports = [
         created_at: "2020-04-01T01:51:31.000000Z",
         supplier_name: "Casella Family Brands",
         brand_name: "CFB YellowTail",
-        vintage: "19", active: true
+        vintage: "19", active: true,
+        depots: [
+            {
+                id: 1,
+                name: 'test',
+                qty: 0,
+            },
+            {
+                id: 2,
+                name: 'test-2',
+                qty: 2
+            }
+        ],
     }, {
         id: 546,
         supplier_id: 23,
@@ -3913,7 +4945,19 @@ module.exports = [
         created_at: "2020-03-31T03:28:26.000000Z",
         supplier_name: "Casella Family Brands",
         brand_name: "CFB YellowTail",
-        vintage: null, active: true
+        vintage: null, active: true,
+        depots: [
+            {
+                id: 1,
+                name: 'test',
+                qty: 0,
+            },
+            {
+                id: 2,
+                name: 'test-2',
+                qty: 2
+            }
+        ],
     }, {
         id: 538,
         supplier_id: 23,
@@ -3958,7 +5002,19 @@ module.exports = [
         created_at: "2020-03-31T03:28:22.000000Z",
         supplier_name: "Casella Family Brands",
         brand_name: "CFB YellowTail",
-        vintage: "19", active: true
+        vintage: "19", active: true,
+        depots: [
+            {
+                id: 1,
+                name: 'test',
+                qty: 0,
+            },
+            {
+                id: 2,
+                name: 'test-2',
+                qty: 2
+            }
+        ],
     }, {
         id: 2161,
         supplier_id: 23,
@@ -4003,7 +5059,19 @@ module.exports = [
         created_at: "2021-01-15T04:24:08.000000Z",
         supplier_name: "Casella Family Brands",
         brand_name: "CFB YellowTail",
-        vintage: "2020", active: true
+        vintage: "2020", active: true,
+        depots: [
+            {
+                id: 1,
+                name: 'test',
+                qty: 0,
+            },
+            {
+                id: 2,
+                name: 'test-2',
+                qty: 2
+            }
+        ],
     }, {
         id: 529,
         supplier_id: 23,
@@ -4048,7 +5116,19 @@ module.exports = [
         created_at: "2020-03-31T03:28:17.000000Z",
         supplier_name: "Casella Family Brands",
         brand_name: "CFB YellowTail",
-        vintage: "19", active: true
+        vintage: "19", active: true,
+        depots: [
+            {
+                id: 1,
+                name: 'test',
+                qty: 0,
+            },
+            {
+                id: 2,
+                name: 'test-2',
+                qty: 2
+            }
+        ],
     }, {
         id: 623,
         supplier_id: 23,
@@ -4093,7 +5173,19 @@ module.exports = [
         created_at: "2020-04-08T02:09:19.000000Z",
         supplier_name: "Casella Family Brands",
         brand_name: "CFB YellowTail",
-        vintage: "19", active: true
+        vintage: "19", active: true,
+        depots: [
+            {
+                id: 1,
+                name: 'test',
+                qty: 0,
+            },
+            {
+                id: 2,
+                name: 'test-2',
+                qty: 2
+            }
+        ],
     }, {
         id: 551,
         supplier_id: 23,
@@ -4138,7 +5230,19 @@ module.exports = [
         created_at: "2020-03-31T03:28:28.000000Z",
         supplier_name: "Casella Family Brands",
         brand_name: "CFB YellowTail",
-        vintage: null, active: true
+        vintage: null, active: true,
+        depots: [
+            {
+                id: 1,
+                name: 'test',
+                qty: 0,
+            },
+            {
+                id: 2,
+                name: 'test-2',
+                qty: 2
+            }
+        ],
     }, {
         id: 543,
         supplier_id: 23,
@@ -4183,7 +5287,19 @@ module.exports = [
         created_at: "2020-03-31T03:28:24.000000Z",
         supplier_name: "Casella Family Brands",
         brand_name: "CFB YellowTail",
-        vintage: null, active: true
+        vintage: null, active: true,
+        depots: [
+            {
+                id: 1,
+                name: 'test',
+                qty: 0,
+            },
+            {
+                id: 2,
+                name: 'test-2',
+                qty: 2
+            }
+        ],
     }, {
         id: 535,
         supplier_id: 23,
@@ -4228,7 +5344,19 @@ module.exports = [
         created_at: "2020-03-31T03:28:20.000000Z",
         supplier_name: "Casella Family Brands",
         brand_name: "CFB YellowTail",
-        vintage: "19", active: true
+        vintage: "19", active: true,
+        depots: [
+            {
+                id: 1,
+                name: 'test',
+                qty: 0,
+            },
+            {
+                id: 2,
+                name: 'test-2',
+                qty: 2
+            }
+        ],
     }, {
         id: 524,
         supplier_id: 23,
@@ -4273,7 +5401,19 @@ module.exports = [
         created_at: "2020-03-31T03:28:15.000000Z",
         supplier_name: "Casella Family Brands",
         brand_name: "CFB YellowTail",
-        vintage: "19", active: true
+        vintage: "19", active: true,
+        depots: [
+            {
+                id: 1,
+                name: 'test',
+                qty: 0,
+            },
+            {
+                id: 2,
+                name: 'test-2',
+                qty: 2
+            }
+        ],
     }, {
         id: 727,
         supplier_id: 23,
@@ -4318,7 +5458,19 @@ module.exports = [
         created_at: "2020-05-25T22:44:57.000000Z",
         supplier_name: "Casella Family Brands",
         brand_name: "CFB YellowTail",
-        vintage: "18", active: true
+        vintage: "18", active: true,
+        depots: [
+            {
+                id: 1,
+                name: 'test',
+                qty: 0,
+            },
+            {
+                id: 2,
+                name: 'test-2',
+                qty: 2
+            }
+        ],
     }, {
         id: 547,
         supplier_id: 23,
@@ -4363,7 +5515,19 @@ module.exports = [
         created_at: "2020-03-31T03:28:26.000000Z",
         supplier_name: "Casella Family Brands",
         brand_name: "CFB YellowTail",
-        vintage: null, active: true
+        vintage: null, active: true,
+        depots: [
+            {
+                id: 1,
+                name: 'test',
+                qty: 0,
+            },
+            {
+                id: 2,
+                name: 'test-2',
+                qty: 2
+            }
+        ],
     }, {
         id: 539,
         supplier_id: 23,
@@ -4408,7 +5572,19 @@ module.exports = [
         created_at: "2020-03-31T03:28:22.000000Z",
         supplier_name: "Casella Family Brands",
         brand_name: "CFB YellowTail",
-        vintage: "19", active: true
+        vintage: "19", active: true,
+        depots: [
+            {
+                id: 1,
+                name: 'test',
+                qty: 0,
+            },
+            {
+                id: 2,
+                name: 'test-2',
+                qty: 2
+            }
+        ],
     }, {
         id: 972,
         supplier_id: 23,
@@ -4453,7 +5629,19 @@ module.exports = [
         created_at: "2020-07-08T04:15:48.000000Z",
         supplier_name: "Casella Family Brands",
         brand_name: "CFB YellowTail",
-        vintage: "19", active: true
+        vintage: "19", active: true,
+        depots: [
+            {
+                id: 1,
+                name: 'test',
+                qty: 0,
+            },
+            {
+                id: 2,
+                name: 'test-2',
+                qty: 2
+            }
+        ],
     }, {
         id: 2162,
         supplier_id: 23,
@@ -4499,5 +5687,17 @@ module.exports = [
         supplier_name: "Casella Family Brands",
         brand_name: "CFB YellowTail",
         vintage: "2020",
+        depots: [
+            {
+                id: 1,
+                name: 'test',
+                qty: 0,
+            },
+            {
+                id: 2,
+                name: 'test-2',
+                qty: 2
+            }
+        ],
     },
 ];

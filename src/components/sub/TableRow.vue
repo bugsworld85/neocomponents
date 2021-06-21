@@ -85,7 +85,7 @@
                     :for="`row-${index}-col-${colIndex}-${getKey(column)}`"
                 ></label>
             </div>
-            <div v-else-if="getType(column) === 'options'">
+            <div v-else-if="getType(column) === 'select'">
                 <select
                     class="form-control"
                     @change="handleSelectChange($event, row, column)"
@@ -109,6 +109,7 @@
                     :column="column"
                     :row="row"
                     :index="i"
+                    :parent="row"
                 ></component>
             </div>
             <component
@@ -117,19 +118,21 @@
                 :column="column"
                 :row="row"
                 :value="row[getKey(column)]"
-                :index="i"
+                :index="index"
+                :parent="row"
             ></component>
             <span
                 class="text-only clickable d-block"
                 role="button"
                 v-else-if="getType(column) === 'prompt'"
                 @click="handleClick($event, column, row)"
-                >{{
+            >
+                {{
                     isset(column.mutate)
                         ? column.mutate(row[getKey(column)], row)
                         : row[getKey(column)]
-                }}</span
-            >
+                }}
+            </span>
             <span
                 class="text-only"
                 v-else-if="isSearchable(column)"
@@ -142,17 +145,20 @@
                         $options._scopeId
                     )
                 "
-                >{{
+            >
+                {{
                     isset(column.mutate)
                         ? column.mutate(row[getKey(column)], row)
                         : row[getKey(column)]
-                }}</span
-            >
-            <span class="text-only" v-else-if="getType(column) !== 'divider'">{{
-                isset(column.mutate)
-                    ? column.mutate(row[getKey(column)], row)
-                    : row[getKey(column)]
-            }}</span>
+                }}
+            </span>
+            <span class="text-only" v-else-if="getType(column) !== 'divider'">
+                {{
+                    isset(column.mutate)
+                        ? column.mutate(row[getKey(column)], row)
+                        : row[getKey(column)]
+                }}
+            </span>
         </td>
     </tr>
 </template>

@@ -1,6 +1,8 @@
-#### 0.2.2 (2021-06-19)
+#### 0.2.2 (2021-06-21)
 - moved table head into its own component.
-
+- changed `options` column type to `select`
+- added `table-head` and `table-row` slots.
+- added `empty` slot and is shown when table is empty.
 
 #### 0.2.1 (2021-06-16)
 - fixed mobile responsiveness of paginator

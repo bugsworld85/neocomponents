@@ -96,21 +96,35 @@
             :style="{ maxHeight: maxHeight !== null ? maxHeight : 'initial' }"
         >
             <table class="table" ref="table">
-                <TableHead
-                    v-if="tableColumns.length > 0"
+                <slot
+                    name="table-head"
                     :allowMultipleRowSelection="allowMultipleRowSelection"
-                    v-model="checkAll"
                     :currentColumn="currentColumn"
                     :asc="asc"
-                    :columns="tableColumns"
-                    @freeze="handleFreeze"
-                    @checked="handleCheckAll"
-                    @click="handleColumnSort"
-                ></TableHead>
+                    :columns="adjustedColumns"
+                    :hasSubColumns="hasSubColumns"
+                    :freeze="handleFreeze"
+                    :checked="handleCheckAll"
+                    :click="handleColumnSort"
+                >
+                    <TableHead
+                        v-if="tableColumns.length > 0"
+                        v-model="checkAll"
+                        :allowMultipleRowSelection="allowMultipleRowSelection"
+                        :currentColumn="currentColumn"
+                        :asc="asc"
+                        :columns="adjustedColumns"
+                        :hasSubColumns="hasSubColumns"
+                        @freeze="handleFreeze"
+                        @checked="handleCheckAll"
+                        @click="handleColumnSort"
+                    ></TableHead>
+                </slot>
+
                 <tbody v-if="loading || searching">
                     <tr>
                         <td
-                            :colspan="tableColumns.length + 1"
+                            :colspan="adjustedColumns.length + 1"
                             v-if="loading"
                             class="loading-container"
                         >
@@ -121,35 +135,48 @@
                                 {{ loadingMessage }}
                             </span>
                         </td>
-                        <td :colspan="tableColumns.length + 1" v-else>
+                        <td :colspan="adjustedColumns.length + 1" v-else>
                             Searching
                             <code> {{ keyword }} </code>...
                         </td>
                     </tr>
                 </tbody>
                 <tbody v-else-if="rows().length > 0" class="sticky" ref="tbody">
-                    <TableRow
+                    <slot
                         v-for="(row, i) in rows()"
-                        :key="`row-${i}`"
-                        :ref="`row${i}`"
+                        name="table-row"
                         :index="i"
                         :row="row"
-                        :keyword="keyword"
-                        :columns="columns"
+                        :columns="adjustedColumns"
                         :allowMultipleRowSelection="allowMultipleRowSelection"
                         :checked="row.checked"
-                        @rowClick="handleRowClick"
-                        @rowCheck="handleRowSelect"
-                        @mounted="handleRowMounted"
-                    ></TableRow>
+                        :rowClick="handleRowClick"
+                        :rowCheck="handleRowSelect"
+                    >
+                        <TableRow
+                            :key="`row-${i}`"
+                            :ref="`row${i}`"
+                            :index="i"
+                            :row="row"
+                            :keyword="keyword"
+                            :columns="adjustedColumns"
+                            :allowMultipleRowSelection="
+                                allowMultipleRowSelection
+                            "
+                            :checked="row.checked"
+                            @rowClick="handleRowClick"
+                            @rowCheck="handleRowSelect"
+                            @mounted="handleRowMounted"
+                        ></TableRow>
+                    </slot>
                 </tbody>
                 <tbody v-else>
                     <tr>
                         <td
-                            :colspan="tableColumns.length + 1"
+                            :colspan="adjustedColumns.length + 1"
                             style="padding: 8px 10px; pointer-events: none"
                         >
-                            {{ emptyMessage }}
+                            <slot name="empty">{{ emptyMessage }}</slot>
                         </td>
                     </tr>
                 </tbody>
@@ -310,6 +337,53 @@ export default {
         TableHead,
     },
     computed: {
+        hasSubColumns() {
+            return this.isset(
+                this.columns.find((column) => {
+                    return (
+                        column.type === "columns" &&
+                        this.isset(column.columns) &&
+                        column.columns.length >= 1
+                    );
+                })
+            );
+        },
+        adjustedColumns() {
+            let column = this.columns.find((column) => {
+                return (
+                    column.type === "columns" &&
+                    this.isset(column.columns) &&
+                    column.columns.length >= 1
+                );
+            });
+
+            if (this.isset(column)) {
+                let index = this.columns.findIndex((column) => {
+                    return (
+                        column.type === "columns" &&
+                        this.isset(column.columns) &&
+                        column.columns.length >= 1
+                    );
+                });
+
+                if (index > 0) {
+                    let columns = this.columns.slice();
+
+                    let parent = columns.splice(index, 1);
+
+                    column.columns.forEach((column, i) => {
+                        column.parent = parent;
+                        columns.splice(index + i, 0, column);
+                    });
+                    return columns;
+                }
+            }
+            return this.columns;
+        },
+        hasTableRowSlot() {
+            console.log(this);
+            return !!this.$slots["table-row"];
+        },
         hasBeforeTableSlot() {
             return !!this.$slots["before-table"];
         },

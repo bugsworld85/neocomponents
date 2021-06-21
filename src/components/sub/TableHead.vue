@@ -8,6 +8,7 @@
                 :class="{
                     freeze: freezeColumn === 0,
                 }"
+                :rowspan="hasSubColumns ? 2 : 1"
             >
                 <div class="custom-control custom-checkbox">
                     <input
@@ -38,6 +39,7 @@
                     'active-column': currentColumn === getKey(column),
                 }"
                 :column-key="getKey(column)"
+                :rowspan="hasSubColumns ? 2 : 1"
             >
                 <button
                     @click="handleColumnSort(getKey(column))"
@@ -94,6 +96,12 @@
                 </span>
             </th>
         </tr>
+        <tr v-if="hasSubColumns">
+            <th
+                v-for="(column, i) in columns"
+                :key="`thead-col-dummy-${i}`"
+            ></th>
+        </tr>
     </thead>
 </template>
 
@@ -128,14 +136,22 @@ export default {
             type: Boolean,
             default: false,
         },
+        hasSubColumns: {
+            type: Boolean,
+            default: false,
+        },
     },
     data() {
         return {
             checkAll: this.value,
+            dummyColumns: [],
         };
     },
     updated() {
         this.updateComponents();
+    },
+    mounted() {
+        console.log(this.columns);
     },
     methods: {
         handleFreeze: _.debounce(function (column, index) {

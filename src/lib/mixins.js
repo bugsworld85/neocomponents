@@ -64,6 +64,7 @@ module.exports = [
                     "options",
                     "prompt",
                     "divider",
+                    "columns",
                 ];
 
                 if (!this.isString(column)) {
