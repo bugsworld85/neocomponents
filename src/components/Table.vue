@@ -492,8 +492,8 @@ export default {
         this.updateComponents();
     },
     methods: {
-        handleRowMounted(row, index) {
-            this.$emit("rowMounted", row, index);
+        handleRowMounted(row, index, TableRow) {
+            this.$emit("rowMounted", row, index, TableRow);
         },
         setLoading(loading = true) {
             this.loading = loading;

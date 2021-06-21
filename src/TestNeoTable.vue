@@ -118,27 +118,27 @@ export default {
                     sortable: true,
                     // freeze: true,
                 },
-                {
-                    key: "depots",
-                    title: "Depots",
-                    type: "columns", // disallow freezing on type columns
-                    columns: [
-                        {
-                            key: "depot-1",
-                            title: "Depot 1",
-                            sortable: true,
-                        },
-                        {
-                            key: "depot-2",
-                            title: "Depot 2",
-                            type: "template",
-                            template: Vue.component("testing", {
-                                template: `<span>{{ row.qty }}</span>`,
-                                props: ["column", "row"],
-                            }),
-                        },
-                    ],
-                },
+                // {
+                //     key: "depots",
+                //     title: "Depots",
+                //     type: "columns", // disallow freezing on type columns
+                //     columns: [
+                //         {
+                //             key: "depot-1",
+                //             title: "Depot 1",
+                //             sortable: true,
+                //         },
+                //         {
+                //             key: "depot-2",
+                //             title: "Depot 2",
+                //             type: "template",
+                //             template: Vue.component("testing", {
+                //                 template: `<span>{{ row.qty }}</span>`,
+                //                 props: ["column", "row"],
+                //             }),
+                //         },
+                //     ],
+                // },
                 {
                     key: "active",
                     title: "Active",

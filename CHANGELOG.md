@@ -1,3 +1,7 @@
+#### 0.2.2 (2021-06-22)
+- removed console logs.
+- fixed `child.querySelectorAll` error
+
 #### 0.2.2 (2021-06-21)
 - moved table head into its own component.
 - changed `options` column type to `select`

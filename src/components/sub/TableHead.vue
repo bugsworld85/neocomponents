@@ -150,9 +150,6 @@ export default {
     updated() {
         this.updateComponents();
     },
-    mounted() {
-        console.log(this.columns);
-    },
     methods: {
         handleFreeze: _.debounce(function (column, index) {
             this.$emit("freeze", column, index);
@@ -165,19 +162,24 @@ export default {
         }, 200),
         updateComponents() {
             if (this.$refs.thead) {
-                this.$refs.thead.childNodes.forEach((child) => {
-                    var offsetLeft = 0;
+                setTimeout(() => {
+                    this.$refs.thead.childNodes.forEach((child) => {
+                        var offsetLeft = 0;
+                        if (this.isset(child.querySelectorAll)) {
+                            child
+                                .querySelectorAll("th, td")
+                                .forEach((element, i) => {
+                                    if (element.classList.contains("freeze")) {
+                                        element.style.left = `${offsetLeft}px`;
 
-                    child.querySelectorAll("th, td").forEach((element, i) => {
-                        if (element.classList.contains("freeze")) {
-                            element.style.left = `${offsetLeft}px`;
-
-                            offsetLeft += element.offsetWidth;
-                        } else {
-                            element.style.left = "initial";
+                                        offsetLeft += element.offsetWidth;
+                                    } else {
+                                        element.style.left = "initial";
+                                    }
+                                });
                         }
                     });
-                });
+                }, 0);
             }
         },
     },

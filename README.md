@@ -172,7 +172,7 @@ Event | Accepts | Description
 `@sortClick` | `sortColumnKey, isAsc` | Fired when you click on column header title.
 `@rowClick` | `row` | Listen to row click.
 `@mounted` | `NeoTable` | Hook when NeoTable is mounted.
-`@rowMounted` | `row` | Hook when table row is mounted.
+`@rowMounted` | `row`, `index`, `TableRow` | Hook when table row is mounted.
 
 #### Column Properties
 Property | Type | Default | Required | Description

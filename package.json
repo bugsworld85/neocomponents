@@ -1,6 +1,6 @@
 {
     "name": "@bugsworld85/neocomponents",
-    "version": "0.2.2",
+    "version": "0.2.3",
     "private": false,
     "scripts": {
         "serve": "vue-cli-service serve",

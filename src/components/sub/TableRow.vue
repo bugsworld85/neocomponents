@@ -1,5 +1,5 @@
 <template>
-    <tr @click="handleRowClick(row, index)">
+    <tr @click="handleRowClick(row, index)" ref="tr">
         <td
             v-if="allowMultipleRowSelection"
             :class="{
@@ -224,8 +224,11 @@ export default {
             },
         },
     },
+    updated() {
+        this.$emit("updated", this.row, this.index, this);
+    },
     mounted() {
-        this.$emit("mounted", this.row, this.index);
+        this.$emit("mounted", this.row, this.index, this);
     },
     methods: {
         handleSelectChange: _.debounce(function (e, row, column) {
