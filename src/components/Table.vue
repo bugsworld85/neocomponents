@@ -174,7 +174,8 @@
                     <tr>
                         <td
                             :colspan="adjustedColumns.length + 1"
-                            style="padding: 8px 10px; pointer-events: none"
+                            style="padding: 8px 10px;"
+                            class="empty"
                         >
                             <slot name="empty">{{ emptyMessage }}</slot>
                         </td>
