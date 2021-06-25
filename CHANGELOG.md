@@ -1,4 +1,8 @@
-#### 0.2.2 (2021-06-22)
+#### 0.2.5 (2021-06-25)
+- passed `TableRow` into confirmed as 4th argument.
+- added ref tag to row checkbox.
+
+#### 0.2.4 (2021-06-22)
 - removed console logs.
 - fixed `child.querySelectorAll` error
 

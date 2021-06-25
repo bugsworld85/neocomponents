@@ -10,6 +10,7 @@
                 <input
                     type="checkbox"
                     class="custom-control-input"
+                    ref="rowCheckbox"
                     :id="`row-${index}-col-select`"
                     v-model="isChecked"
                     @change="handleRowCheck($event, row, index)"
@@ -256,7 +257,7 @@ export default {
 
                 if (this.isset(value)) {
                     row[this.getKey(column)] = value;
-                    column.confirmed(value, row, oldValue);
+                    column.confirmed(value, row, oldValue, this);
                 }
             }
         }, 100),

@@ -193,7 +193,7 @@ Property | Type | Default | Required | Description
 Property | Type | Default | Accepts  | Required | Description
 ------- | ---------------- | ------- | ---------- | - | ---------
 `mutate` |  `Function` | `null` | `value`, `row` | no | Callback function to mutate or alter column data value. Accepts 2 parameters which is the cell value and the `row` data. Must return desired output.
-`confirm` |  `Function` | `null` | `value` | no | Callback function after confirming the `prompt` input.
+`confirmed` |  `Function` | `null` | `value`, `row`, `oldValue`, `TableRow` | no | Callback function after confirming the `prompt` input.
 
 #### Column Available Events (`text` and `number` column types only)
 Property | Type | Accepts  | Description
