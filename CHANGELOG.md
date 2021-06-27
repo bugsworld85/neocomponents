@@ -1,3 +1,6 @@
+#### 0.2.6 (2021-06-27)
+- fixed `freezeColumn` property not working.
+
 #### 0.2.5 (2021-06-25)
 - passed `TableRow` into confirmed as 4th argument.
 - added ref tag to row checkbox.

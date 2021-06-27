@@ -164,6 +164,7 @@
                                 allowMultipleRowSelection
                             "
                             :checked="row.checked"
+                            :freezeColumn="freezeColumn"
                             @rowClick="handleRowClick"
                             @rowCheck="handleRowSelect"
                             @mounted="handleRowMounted"

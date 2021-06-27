@@ -5,6 +5,7 @@
             :class="{
                 freeze: freezeColumn === 0,
             }"
+            column-key="checkbox"
         >
             <div class="custom-control custom-checkbox">
                 <input
