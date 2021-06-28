@@ -115,6 +115,7 @@
                         :asc="asc"
                         :columns="adjustedColumns"
                         :hasSubColumns="hasSubColumns"
+                        :freezeColumn="freezeColumn"
                         @freeze="handleFreeze"
                         @checked="handleCheckAll"
                         @click="handleColumnSort"

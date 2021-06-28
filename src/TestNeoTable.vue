@@ -5,7 +5,7 @@
             :columns="columns"
             :limit="25"
             maxHeight="600px"
-            :freezeColumn="2"
+            :freezeColumn="0"
             sortedColumn="name"
             :searchedKeyword="`peter`"
             ref="neoTable"
