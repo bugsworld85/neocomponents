@@ -40,6 +40,7 @@
                 }"
                 :column-key="getKey(column)"
                 :rowspan="hasSubColumns ? 2 : 1"
+                :frozenColumns="frozenColumns"
             >
                 <button
                     @click="handleColumnSort(getKey(column))"
@@ -140,6 +141,10 @@ export default {
             type: Boolean,
             default: false,
         },
+        frozenColumns: {
+            type: Array,
+            default: () => [],
+        },
     },
     data() {
         return {
@@ -152,6 +157,7 @@ export default {
     },
     methods: {
         handleFreeze: _.debounce(function (column, index) {
+            column.freeze = !column.freeze;
             this.$emit("freeze", column, index);
         }, 200),
         handleCheckAll: _.debounce(function (e) {

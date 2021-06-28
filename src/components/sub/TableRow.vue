@@ -35,6 +35,7 @@
                 freeze: isFroze(column),
             }"
             :column-key="getKey(column)"
+            :frozenColumns="frozenColumns"
         >
             <input
                 type="text"
@@ -227,6 +228,10 @@ export default {
         collapsed: {
             type: Boolean,
             default: false,
+        },
+        frozenColumns: {
+            type: Array,
+            default: () => [],
         },
     },
     data() {

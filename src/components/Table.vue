@@ -116,6 +116,7 @@
                         :columns="adjustedColumns"
                         :hasSubColumns="hasSubColumns"
                         :freezeColumn="freezeColumn"
+                        :frozenColumns="frozenColumns"
                         @freeze="handleFreeze"
                         @checked="handleCheckAll"
                         @click="handleColumnSort"
@@ -168,6 +169,7 @@
                             :checked="row.checked"
                             :collapsed="row.collapsed"
                             :freezeColumn="freezeColumn"
+                            :frozenColumns="frozenColumns"
                             @rowClick="handleRowClick"
                             @rowCheck="handleRowSelect"
                             @mounted="handleRowMounted"
@@ -490,6 +492,7 @@ export default {
             isSearching: false,
             searchedKeywordModel: this.searchedKeyword,
             currentRow: null,
+            frozenColumns: [],
         };
     },
     created() {
@@ -584,8 +587,14 @@ export default {
                 : false;
         },
         handleFreeze(column, colIndex) {
-            column.freeze = !column.freeze;
-            this.$forceUpdate();
+            if (!this.frozenColumns.includes(colIndex)) {
+                this.frozenColumns.push(colIndex);
+            } else {
+                this.frozenColumns.splice(
+                    this.frozenColumns.indexOf(colIndex),
+                    1
+                );
+            }
         },
         handleSearchClick() {
             this.$refs.searchForm.submit();
