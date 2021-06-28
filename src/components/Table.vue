@@ -150,6 +150,7 @@
                         :columns="adjustedColumns"
                         :allowMultipleRowSelection="allowMultipleRowSelection"
                         :checked="row.checked"
+                        :collapsed="row.collapsed"
                         :rowClick="handleRowClick"
                         :rowCheck="handleRowSelect"
                     >
@@ -164,18 +165,41 @@
                                 allowMultipleRowSelection
                             "
                             :checked="row.checked"
+                            :collapsed="row.collapsed"
                             :freezeColumn="freezeColumn"
                             @rowClick="handleRowClick"
                             @rowCheck="handleRowSelect"
                             @mounted="handleRowMounted"
+                            @collapsed="handleRowCollapsed"
                         ></TableRow>
+                        <tr
+                            :key="`collapsed-row-${i}`"
+                            :class="`collapsed-row collapsed-row-${i}`"
+                            v-if="
+                                isset(currentRow) &&
+                                currentRow.index === row.index
+                            "
+                        >
+                            <td
+                                :colspan="
+                                    allowMultipleRowSelection
+                                        ? adjustedColumns.length + 1
+                                        : adjustedColumns.length
+                                "
+                            >
+                                <slot
+                                    name="row-dropdown"
+                                    :row="currentRow"
+                                ></slot>
+                            </td>
+                        </tr>
                     </slot>
                 </tbody>
                 <tbody v-else>
                     <tr>
                         <td
                             :colspan="adjustedColumns.length + 1"
-                            style="padding: 8px 10px;"
+                            style="padding: 8px 10px"
                             class="empty"
                         >
                             <slot name="empty">{{ emptyMessage }}</slot>
@@ -383,7 +407,6 @@ export default {
             return this.columns;
         },
         hasTableRowSlot() {
-            console.log(this);
             return !!this.$slots["table-row"];
         },
         hasBeforeTableSlot() {
@@ -465,6 +488,7 @@ export default {
                     : this.data.length,
             isSearching: false,
             searchedKeywordModel: this.searchedKeyword,
+            currentRow: null,
         };
     },
     created() {
@@ -475,8 +499,10 @@ export default {
                 });
             }
         }
-        this.data.map((row) => {
+        this.data.map((row, index) => {
             row.checked = false;
+            row.collapsed = false;
+            row.index = index;
 
             return row;
         });
@@ -494,6 +520,14 @@ export default {
         this.updateComponents();
     },
     methods: {
+        handleRowCollapsed(row, index, collapsed, TableRow) {
+            if (row.collapsed) {
+                this.currentRow = row;
+            } else {
+                this.currentRow = null;
+            }
+            collapsed(row, index, TableRow);
+        },
         handleRowMounted(row, index, TableRow) {
             this.$emit("rowMounted", row, index, TableRow);
         },
@@ -504,33 +538,39 @@ export default {
             this.$emit("rowClick", row, index);
         },
         updateComponents() {
-            // if (this.$refs.thead) {
-            //     this.$refs.thead.childNodes.forEach((child) => {
-            //         var offsetLeft = 0;
+            if (this.$refs.thead) {
+                this.$refs.thead.childNodes.forEach((child) => {
+                    var offsetLeft = 0;
+                    if (child.nodeName !== "#comment") {
+                        child
+                            .querySelectorAll("th, td")
+                            .forEach((element, i) => {
+                                if (element.classList.contains("freeze")) {
+                                    element.style.left = `${offsetLeft}px`;
 
-            //         child.querySelectorAll("th, td").forEach((element, i) => {
-            //             if (element.classList.contains("freeze")) {
-            //                 element.style.left = `${offsetLeft}px`;
-
-            //                 offsetLeft += element.offsetWidth;
-            //             } else {
-            //                 element.style.left = "initial";
-            //             }
-            //         });
-            //     });
-            // }
+                                    offsetLeft += element.offsetWidth;
+                                } else {
+                                    element.style.left = "initial";
+                                }
+                            });
+                    }
+                });
+            }
 
             if (this.isset(this.$refs.tbody)) {
                 this.$refs.tbody.childNodes.forEach((child) => {
                     var offsetLeft = 0;
+                    if (child.nodeName !== "#comment") {
+                        child
+                            .querySelectorAll("th, td")
+                            .forEach((element, i) => {
+                                if (element.classList.contains("freeze")) {
+                                    element.style.left = `${offsetLeft}px`;
 
-                    child.querySelectorAll("th, td").forEach((element, i) => {
-                        if (element.classList.contains("freeze")) {
-                            element.style.left = `${offsetLeft}px`;
-
-                            offsetLeft += element.offsetWidth;
-                        }
-                    });
+                                    offsetLeft += element.offsetWidth;
+                                }
+                            });
+                    }
                 });
             }
         },

@@ -1,3 +1,6 @@
+#### 0.2.7 (2021-06-28)
+- Added collapsible row. Will not be included in the documentation.
+
 #### 0.2.6 (2021-06-27)
 - fixed `freezeColumn` property not working.
 

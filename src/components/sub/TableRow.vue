@@ -1,5 +1,9 @@
 <template>
-    <tr @click="handleRowClick(row, index)" ref="tr">
+    <tr
+        @click="handleRowClick(row, index)"
+        ref="tr"
+        :class="{ even: index % 2 == 0 }"
+    >
         <td
             v-if="allowMultipleRowSelection"
             :class="{
@@ -161,6 +165,16 @@
                         : row[getKey(column)]
                 }}
             </span>
+            <button
+                class="btn btn-sm"
+                v-if="
+                    ['string', 'template'].includes(getType(column)) &&
+                    isset(column.collapsed)
+                "
+                @click="handleCollapsedClick(column.collapsed)"
+            >
+                <i class="fa fa-angle-down"></i>
+            </button>
         </td>
     </tr>
 </template>
@@ -210,6 +224,10 @@ export default {
             type: Boolean,
             default: false,
         },
+        collapsed: {
+            type: Boolean,
+            default: false,
+        },
     },
     data() {
         return {
@@ -217,6 +235,14 @@ export default {
         };
     },
     computed: {
+        isCollapsed: {
+            get() {
+                return this.collapsed;
+            },
+            set(value) {
+                this.row.collapsed = value;
+            },
+        },
         isChecked: {
             get() {
                 return this.checked;
@@ -233,6 +259,10 @@ export default {
         this.$emit("mounted", this.row, this.index, this);
     },
     methods: {
+        handleCollapsedClick: _.debounce(function (collapsed) {
+            this.row.collapsed = !this.row.collapsed;
+            this.$emit("collapsed", this.row, this.index, collapsed, this);
+        }, 200),
         handleSelectChange: _.debounce(function (e, row, column) {
             if (
                 !this.isString(column) &&

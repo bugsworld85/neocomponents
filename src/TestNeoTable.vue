@@ -25,21 +25,8 @@
             <template v-slot:empty>
                 <div>testing</div>
             </template>
-            <template
-                v-slot:table-row="{
-                    row,
-                    index,
-                    allowMultipleRowSelection,
-                    checked,
-                }"
-            >
-                <tr>
-                    <td>{{ row.id }}</td>
-                    <td>{{ index }}</td>
-                    <td>{{ checked }}</td>
-                    <td>{{ allowMultipleRowSelection }}</td>
-                    <td>test</td>
-                </tr>
+            <template v-slot:row-dropdown="{ row }">
+                {{ row.id }}
             </template>
         </neo-table>
         <neo-window
@@ -116,6 +103,9 @@ export default {
                     title: "Name",
                     searchable: true,
                     sortable: true,
+                    collapsed: (row, index, TableRow) => {
+                        console.log(row);
+                    },
                     // freeze: true,
                 },
                 // {

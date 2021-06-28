@@ -237,14 +237,15 @@
         }
         tbody {
             tr {
-                &:nth-child(even) {
+                background-color: white;
+                &.even {
                     background-color: #e9ecf3;
-                }
-                &:nth-child(odd) {
-                    background-color: white;
                 }
                 &:hover {
                     background-color: #bae3ef;
+                }
+                &.collapsed-row{
+                    background-color: inherit !important;
                 }
             }
             td {
