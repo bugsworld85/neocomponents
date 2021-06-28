@@ -171,12 +171,24 @@ export default {
                 setTimeout(() => {
                     this.$refs.thead.childNodes.forEach((child) => {
                         var offsetLeft = 0;
-                        if (this.isset(child.querySelectorAll)) {
+                        if (child.nodeName !== "#comment") {
                             child
                                 .querySelectorAll("th, td")
                                 .forEach((element, i) => {
                                     if (element.classList.contains("freeze")) {
-                                        element.style.left = `${offsetLeft}px`;
+                                        let left = offsetLeft;
+                                        if (
+                                            this.isset(
+                                                element.previousElementSibling
+                                            ) &&
+                                            element.previousElementSibling.classList.contains(
+                                                "is-divider"
+                                            )
+                                        ) {
+                                            left -= 1;
+                                        }
+
+                                        element.style.left = `${left}px`;
 
                                         offsetLeft += element.offsetWidth;
                                     } else {

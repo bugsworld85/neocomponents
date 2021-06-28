@@ -542,25 +542,6 @@ export default {
             this.$emit("rowClick", row, index);
         },
         updateComponents() {
-            if (this.$refs.thead) {
-                this.$refs.thead.childNodes.forEach((child) => {
-                    var offsetLeft = 0;
-                    if (child.nodeName !== "#comment") {
-                        child
-                            .querySelectorAll("th, td")
-                            .forEach((element, i) => {
-                                if (element.classList.contains("freeze")) {
-                                    element.style.left = `${offsetLeft}px`;
-
-                                    offsetLeft += element.offsetWidth;
-                                } else {
-                                    element.style.left = "initial";
-                                }
-                            });
-                    }
-                });
-            }
-
             if (this.isset(this.$refs.tbody)) {
                 this.$refs.tbody.childNodes.forEach((child) => {
                     var offsetLeft = 0;
@@ -569,7 +550,18 @@ export default {
                             .querySelectorAll("th, td")
                             .forEach((element, i) => {
                                 if (element.classList.contains("freeze")) {
-                                    element.style.left = `${offsetLeft}px`;
+                                    let left = offsetLeft;
+                                    if (
+                                        this.isset(
+                                            element.previousElementSibling
+                                        ) &&
+                                        element.previousElementSibling.classList.contains(
+                                            "is-divider"
+                                        )
+                                    ) {
+                                        left -= 1;
+                                    }
+                                    element.style.left = `${left}px`;
 
                                     offsetLeft += element.offsetWidth;
                                 }

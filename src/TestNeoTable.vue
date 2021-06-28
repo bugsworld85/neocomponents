@@ -82,11 +82,17 @@ export default {
             products: TestData,
             columns: [
                 {
+                    type: "divider",
+                },
+                {
                     key: "sku",
                     title: "SKU",
                     searchable: true,
                     sortable: true,
                     freeze: true,
+                },
+                {
+                    type: "divider",
                 },
                 {
                     key: "your_sku",
