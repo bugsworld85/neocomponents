@@ -38,6 +38,9 @@
             :column-type="getType(column)"
             :frozenColumns="frozenColumns"
         >
+            <span v-if="getType(column) === 'text'" type="text">{{
+                row[getKey(column)]
+            }}</span>
             <input
                 type="text"
                 v-model="row[getKey(column)]"

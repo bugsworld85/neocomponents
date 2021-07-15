@@ -1,6 +1,7 @@
 #### 0.2.12 (2021-07-16)
 - added `editOnClick` table prop to `NeoTable`.
 - fixed `v-html` overrides.
+- column type `text` width now auto scales.
 
 #### 0.2.11 (2021-06-30)
 - added `column` and `TableRow` as additional arguments to `mutate` method.
