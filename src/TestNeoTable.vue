@@ -103,6 +103,7 @@ export default {
                     input(e) {
                         console.log(e.target.value);
                     },
+                    editOnClick: true,
                 },
                 {
                     key: "name",
@@ -182,6 +183,80 @@ export default {
                     key: "updated_at",
                     title: "Updated At",
                     sortable: true,
+                },
+                {
+                    key: "unit",
+                    title: "Unit",
+                    disableFreezing: true,
+                    type: "select",
+                    options: [
+                        {
+                            text: "Bottle",
+                            value: "bottle",
+                        },
+                        {
+                            text: "Can",
+                            value: "can",
+                        },
+                        {
+                            text: "mL",
+                            value: "mL",
+                        },
+                    ],
+                    change(e) {
+                        console.log(e.target.value);
+                    },
+                },
+                {
+                    key: "depot_1",
+                    title: "Depot 1",
+                    type: "template",
+                    template: Vue.component("view-product", {
+                        template: `<span>{{ qty }}</span>`,
+                        props: ["column", "row"],
+                        data() {
+                            return {
+                                qty: 2,
+                            };
+                        },
+                    }),
+                },
+                {
+                    key: "depot_2",
+                    title: "Depot 2",
+                    type: "template",
+                    template: Vue.component("view-product", {
+                        template: `<span>{{ qty }}</span>`,
+                        props: ["column", "row"],
+                        data() {
+                            return {
+                                qty: 4,
+                            };
+                        },
+                        methods: {
+                            getQty() {
+                                return this.qty;
+                            },
+                        },
+                    }),
+                },
+                {
+                    key: "total",
+                    title: "Total",
+                    mutate: (value, row, column, columns) => {
+                        let depot1 = columns.find((col) => {
+                            return col.key === "depot_1";
+                        });
+
+                        let depot2 = columns.find((col) => {
+                            return col.key === "depot_2";
+                        });
+                        // depot1 = typeof depot1 !== 'undefined' ? depot1 : 0;
+                        // depot2 = typeof depot_2 !== 'undefined' ? depot_2 : 0;
+
+                        // console.log(columns);
+                        return 0;
+                    },
                 },
                 {
                     key: "actions",

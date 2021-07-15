@@ -188,11 +188,12 @@ Property | Type | Default | Required | Description
 `type` |  `String` | `"string"` | no | `string`, `text`, `number`, `switch`, `checkbox`, `actions`, `template`, `options`, `prompt`, `divider`, `columns`. Definition of each type is described below.
 `disableFreezing` |  `Boolean` | `false` | no | Hide's the freeze button from the table header.
 `options` |  `Array` | `[]` | no | Options for `select` column type. Accepts `Array` of `{ value: text }` object.
+`editOnClick` |  `Boolean` | `false` | no | Edit target cell on a single click. Works on `input` type columns only.
 
 #### Column Methods
 Property | Type | Default | Accepts  | Required | Description
 ------- | ---------------- | ------- | ---------- | - | ---------
-`mutate` |  `Function` | `null` | `value`, `row` | no | Callback function to mutate or alter column data value. Accepts 2 parameters which is the cell value and the `row` data. Must return desired output.
+`mutate` |  `Function` | `null` | `value`, `row`, `column`, `TableRow` | no | Callback function to mutate or alter column data value. Accepts 2 parameters which is the cell value and the `row` data. Must return desired output.
 `confirmed` |  `Function` | `null` | `value`, `row`, `oldValue`, `TableRow` | no | Callback function after confirming the `prompt` input.
 
 #### Column Available Events (`text` and `number` column types only)

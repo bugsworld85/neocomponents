@@ -1,4 +1,11 @@
-#### 0.2.7 (2021-06-28)
+#### 0.2.12 (2021-07-16)
+- added `editOnClick` table prop to `NeoTable`.
+- fixed `v-html` overrides.
+
+#### 0.2.11 (2021-06-30)
+- added `column` and `TableRow` as additional arguments to `mutate` method.
+
+#### 0.2.10 (2021-06-28)
 - Added collapsible row. Will not be included in the documentation.
 
 #### 0.2.6 (2021-06-27)

@@ -61,7 +61,7 @@ module.exports = [
                     "checkbox",
                     "actions",
                     "template",
-                    "options",
+                    "select",
                     "prompt",
                     "divider",
                     "columns",

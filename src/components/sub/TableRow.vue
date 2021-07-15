@@ -35,6 +35,7 @@
                 freeze: isFroze(column),
             }"
             :column-key="getKey(column)"
+            :column-type="getType(column)"
             :frozenColumns="frozenColumns"
         >
             <input
@@ -42,6 +43,7 @@
                 v-model="row[getKey(column)]"
                 v-if="getType(column) === 'text'"
                 readonly="readonly"
+                @click="handleInputClick($event, column, row)"
                 @dblclick="handleInputDoubleClick($event, column, row)"
                 @blur="handleInputBlur($event, column, row)"
                 @keyup="handleInputKeyup($event, column, row)"
@@ -68,6 +70,7 @@
                 v-model.number="row[getKey(column)]"
                 v-else-if="getType(column) === 'number'"
                 readonly="readonly"
+                @click="handleInputClick($event, column, row)"
                 @dblclick="handleInputDoubleClick($event, column, row)"
                 @blur="handleInputBlur($event, column, row)"
                 @keyup="handleInputKeyup($event, column, row)"
@@ -97,6 +100,7 @@
                     class="form-control"
                     @change="handleSelectChange($event, row, column)"
                     v-if="isset(column.options)"
+                    v-model="row[getKey(column)]"
                 >
                     <option
                         v-for="option in column.options"
@@ -127,6 +131,7 @@
                 :value="row[getKey(column)]"
                 :index="index"
                 :parent="row"
+                :ref="getKey(column)"
             ></component>
             <span
                 class="text-only clickable d-block"
@@ -136,7 +141,12 @@
             >
                 {{
                     isset(column.mutate)
-                        ? column.mutate(row[getKey(column)], row)
+                        ? column.mutate(
+                              row[getKey(column)],
+                              row,
+                              column,
+                              columns
+                          )
                         : row[getKey(column)]
                 }}
             </span>
@@ -146,23 +156,28 @@
                 v-html="
                     $options.filters.highlight(
                         isset(column.mutate)
-                            ? column.mutate(row[getKey(column)], row)
+                            ? column.mutate(
+                                  row[getKey(column)],
+                                  row,
+                                  column,
+                                  columns
+                              )
                             : row[getKey(column)],
                         keyword,
                         $options._scopeId
                     )
                 "
             >
-                {{
-                    isset(column.mutate)
-                        ? column.mutate(row[getKey(column)], row)
-                        : row[getKey(column)]
-                }}
             </span>
             <span class="text-only" v-else-if="getType(column) !== 'divider'">
                 {{
                     isset(column.mutate)
-                        ? column.mutate(row[getKey(column)], row)
+                        ? column.mutate(
+                              row[getKey(column)],
+                              row,
+                              column,
+                              columns
+                          )
                         : row[getKey(column)]
                 }}
             </span>
@@ -240,6 +255,9 @@ export default {
         };
     },
     computed: {
+        thisComponent() {
+            return this;
+        },
         isCollapsed: {
             get() {
                 return this.collapsed;
@@ -346,6 +364,20 @@ export default {
                 column.blur(e, row, column);
             }
         }),
+        handleInputClick: _.debounce(function (e, column, row) {
+            if (this.isset(column.editOnClick) && column.editOnClick) {
+                this.oldInputValue = e.target.value;
+                e.target.readOnly = false;
+
+                if (
+                    !this.isString(column) &&
+                    {}.hasOwnProperty.call(column, "click") &&
+                    e.target.readOnly === false
+                ) {
+                    column.click(e, row, column);
+                }
+            }
+        }),
         handleInputDoubleClick: _.debounce(function (e, column, row) {
             this.oldInputValue = e.target.value;
             e.target.readOnly = false;
@@ -373,4 +405,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+select.form-control {
+    background: transparent;
+    border-radius: 0;
+    border-top: none;
+    border-bottom: none;
+}
 </style>

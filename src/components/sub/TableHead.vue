@@ -47,9 +47,7 @@
                     v-if="isSortable(column)"
                     type="button"
                 >
-                    <span v-html="getTitle(column)">{{
-                        getTitle(column)
-                    }}</span>
+                    <span v-html="getTitle(column)"></span>
                     <i
                         class="fa fa-sort-up text-primary"
                         v-if="isAscending(column, currentColumn, asc)"
@@ -61,9 +59,7 @@
                     <i class="fa fa-sort" v-else></i>
                 </button>
                 <span v-else-if="getType(column) !== 'divider'">
-                    <span v-html="getTitle(column)">{{
-                        getTitle(column)
-                    }}</span>
+                    <span v-html="getTitle(column)"></span>
                 </span>
                 <span
                     v-if="
