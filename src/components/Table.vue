@@ -545,7 +545,7 @@ export default {
             if (this.isset(this.$refs.tbody)) {
                 this.$refs.tbody.childNodes.forEach((child) => {
                     var offsetLeft = 0;
-                    if (child.nodeName !== "#comment") {
+                    if (child.nodeName !== "#comment" && child.nodeName !== "#text") {
                         child
                             .querySelectorAll("th, td")
                             .forEach((element, i) => {
